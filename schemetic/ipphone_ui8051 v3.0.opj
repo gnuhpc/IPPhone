@@ -1,0 +1,36 @@
+(ExpressProject ""
+  (ProjectVersion "19981106")
+  (ProjectType "PCB")
+  (Folder "Design Resources"
+    (Folder "Library")
+    (File ".\ipphone_ui8051 v3.0.dsn"
+      (Type "Schematic Design"))
+    (BuildFileAddedOrDeleted "x")
+    (CompileFileAddedOrDeleted "x")
+    (NoModify))
+  (Folder "Outputs")
+  (Folder "Referenced Projects")
+  (PartMRUSelector)
+  (GlobalState
+    (FileView
+      (Path "Design Resources")
+      (Path "Design Resources" ".\ipphone_ui8051 v3.0.dsn")
+      (Path "Design Resources" ".\ipphone_ui8051 v3.0.dsn" "MainBoard")
+      (Select "Design Resources" ".\ipphone_ui8051 v3.0.dsn" "MainBoard"
+         "1 Connector"))
+    (HierarchyView)
+    (Doc
+      (Type "COrCapturePMDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -4 -30 0 200 0 505"))
+      (Tab 0))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -4 -30 44 1308 58 597")
+        (Scroll "0 231")
+        (Zoom "100")
+        (Occurrence "/"))
+      (Path "E:\VOIPNEW\SCHEMETIC\IPPHONE_UI8051 V3.0.DSN")
+      (Schematic "MainBoard")
+      (Page "1 Connector"))))

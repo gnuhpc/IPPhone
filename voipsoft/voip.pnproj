@@ -1,0 +1,1 @@
+<Project name="voip"><File path="main.c"></File><File path="string.c"></File><File path="sys.h"></File><File path="type.h"></File><File path="uart.c"></File><File path="ui.c"></File><File path="lcd.c"></File></Project>

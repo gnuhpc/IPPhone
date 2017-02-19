@@ -1,0 +1,455 @@
+Archive member included because of file (symbol)
+
+C:/WinAVR/bin/../lib/gcc/avr/3.4.1/avr5\libgcc.a(_clear_bss.o)
+                              D:/voipsoft/main.o (__do_clear_bss)
+
+Allocating common symbols
+Common symbol       size              file
+
+_iDataPos           0x1               D:/voipsoft/main.o
+_pInputBuf          0x30              D:/voipsoft/main.o
+_pCommand           0x4               D:/voipsoft/main.o
+_iInputHead         0x1               D:/voipsoft/main.o
+i                   0x1               D:/voipsoft/main.o
+_iInputTail         0x1               D:/voipsoft/main.o
+_pData              0x19              D:/voipsoft/main.o
+_iCommandPos        0x1               D:/voipsoft/main.o
+_iMode              0x1               D:/voipsoft/main.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+Address of section .data set to 0x800100
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+LOAD D:/voipsoft/main.o
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5\libm.a
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.1/avr5\libgcc.a
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5\libc.a
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.1/avr5\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000      0x812
+ *(.vectors)
+ .vectors       0x00000000       0x8c C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+                0x0000008c                __ctors_start = .
+ *(.ctors)
+                0x0000008c                __ctors_end = .
+                0x0000008c                __dtors_start = .
+ *(.dtors)
+                0x0000008c                __dtors_end = .
+ *(.progmem.gcc*)
+ *(.progmem*)
+                0x0000008c                . = ALIGN (0x2)
+ *(.init0)
+ *(.init1)
+ *(.init2)
+ .init2         0x0000008c        0xc C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+ *(.init3)
+ *(.init4)
+ .init4         0x00000098       0x1a C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+                0x00000098                __do_copy_data
+ .init4         0x000000b2       0x10 C:/WinAVR/bin/../lib/gcc/avr/3.4.1/avr5\libgcc.a(_clear_bss.o)
+                0x000000b2                __do_clear_bss
+ *(.init5)
+ *(.init6)
+ *(.init7)
+ *(.init8)
+ *(.init9)
+ .init9         0x000000c2        0x4 C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+ *(.text)
+ .text          0x000000c6        0x4 C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+                0x000000c6                __vector_22
+                0x000000c6                __vector_28
+                0x000000c6                __vector_32
+                0x000000c6                __vector_34
+                0x000000c6                __vector_24
+                0x000000c6                __vector_12
+                0x000000c6                __bad_interrupt
+                0x000000c6                __vector_6
+                0x000000c6                __vector_31
+                0x000000c6                __vector_3
+                0x000000c6                __vector_23
+                0x000000c6                __vector_30
+                0x000000c6                __vector_25
+                0x000000c6                __vector_11
+                0x000000c6                __vector_13
+                0x000000c6                __vector_17
+                0x000000c6                __vector_19
+                0x000000c6                __vector_7
+                0x000000c6                __vector_27
+                0x000000c6                __vector_5
+                0x000000c6                __vector_33
+                0x000000c6                __vector_4
+                0x000000c6                __vector_9
+                0x000000c6                __vector_2
+                0x000000c6                __vector_21
+                0x000000c6                __vector_15
+                0x000000c6                __vector_29
+                0x000000c6                __vector_8
+                0x000000c6                __vector_26
+                0x000000c6                __vector_14
+                0x000000c6                __vector_10
+                0x000000c6                __vector_18
+                0x000000c6                __vector_20
+ .text          0x000000ca      0x748 D:/voipsoft/main.o
+                0x000005f8                Lcd_reinit
+                0x00000730                __vector_1
+                0x00000198                Write_Command
+                0x00000274                Keyboard
+                0x0000058a                UART_Init
+                0x000003de                UI_Init
+                0x0000014a                nibble_mode
+                0x000005da                memcpy_c2d
+                0x000000fc                delay_1ms
+                0x00000258                Initialize_LCD
+                0x000004a2                UI_HandleSerialChar
+                0x000001e8                write_data
+                0x0000077c                Lcd_close
+                0x000001d2                Write_Position
+                0x0000045e                memcmp_c2d
+                0x0000059e                UART_Run
+                0x000000e0                delay_1us
+                0x0000053a                UI_HandleKey
+                0x00000438                _SendData
+                0x00000108                delay_nms
+                0x000003fe                UART_SendChar
+                0x000007e8                main
+                0x0000041a                _SendCommand
+                0x000005ec                memset_d
+                0x00000606                onekey
+                0x000000e4                delay_nus
+                0x0000047e                _CompareCommand
+                0x000003ec                _isprint
+                0x000000ca                Delay
+                0x00000792                ControlInitialize
+                0x00000406                _Padding
+                0x00000226                Write_String
+                0x00000120                En_Toggle
+                0x00000654                __vector_16
+                0x00000244                clear_screen
+                0x00000812                . = ALIGN (0x2)
+ *(.text.*)
+                0x00000812                . = ALIGN (0x2)
+ *(.fini9)
+ *(.fini8)
+ *(.fini7)
+ *(.fini6)
+ *(.fini5)
+ *(.fini4)
+ *(.fini3)
+ *(.fini2)
+ *(.fini1)
+ *(.fini0)
+                0x00000812                _etext = .
+
+.data           0x00800100       0x50 load address 0x00000812
+                0x00800100                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800100       0x50 D:/voipsoft/main.o
+                0x00800112                online
+                0x00800109                servernum1
+                0x00800113                _pKey
+                0x00800100                servernum2
+                0x00800118                keydata
+ *(.gnu.linkonce.d*)
+                0x00800150                . = ALIGN (0x2)
+                0x00800150                _edata = .
+                0x00800150                PROVIDE (__data_end, .)
+
+.bss            0x00800150      0x15c
+                0x00800150                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x00800150      0x109 D:/voipsoft/main.o
+ *(COMMON)
+ COMMON         0x00800259       0x53 D:/voipsoft/main.o
+                                  0x0 (size before relaxing)
+                0x00800259                _iDataPos
+                0x0080025a                _pInputBuf
+                0x0080028a                _pCommand
+                0x0080028e                _iInputHead
+                0x0080028f                i
+                0x00800290                _iInputTail
+                0x00800291                _pData
+                0x008002aa                _iCommandPos
+                0x008002ab                _iMode
+                0x008002ac                PROVIDE (__bss_end, .)
+                0x00000812                __data_load_start = LOADADDR (.data)
+                0x00000862                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x008002ac        0x0
+                0x008002ac                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x008002ac                PROVIDE (__noinit_end, .)
+                0x008002ac                _end = .
+                0x008002ac                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0 load address 0x00000862
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.stab           0x00000000     0x11d0
+ *(.stab)
+ .stab          0x00000000     0x11d0 D:/voipsoft/main.o
+
+.stabstr        0x00000000      0xadb
+ *(.stabstr)
+ .stabstr       0x00000000      0xadb D:/voipsoft/main.o
+                                  0x0 (size before relaxing)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info
+ *(.debug_info)
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev
+ *(.debug_abbrev)
+
+.debug_line
+ *(.debug_line)
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(main.elf elf32-avr)
+
+Cross Reference Table
+
+Symbol                                            File
+ControlInitialize                                 D:/voipsoft/main.o
+Delay                                             D:/voipsoft/main.o
+En_Toggle                                         D:/voipsoft/main.o
+Initialize_LCD                                    D:/voipsoft/main.o
+Keyboard                                          D:/voipsoft/main.o
+Lcd_close                                         D:/voipsoft/main.o
+Lcd_reinit                                        D:/voipsoft/main.o
+UART_Init                                         D:/voipsoft/main.o
+UART_Run                                          D:/voipsoft/main.o
+UART_SendChar                                     D:/voipsoft/main.o
+UI_HandleKey                                      D:/voipsoft/main.o
+UI_HandleSerialChar                               D:/voipsoft/main.o
+UI_Init                                           D:/voipsoft/main.o
+Write_Command                                     D:/voipsoft/main.o
+Write_Position                                    D:/voipsoft/main.o
+Write_String                                      D:/voipsoft/main.o
+_CompareCommand                                   D:/voipsoft/main.o
+_Padding                                          D:/voipsoft/main.o
+_SendCommand                                      D:/voipsoft/main.o
+_SendData                                         D:/voipsoft/main.o
+__bad_interrupt                                   C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__bss_end                                         C:/WinAVR/bin/../lib/gcc/avr/3.4.1/avr5\libgcc.a(_clear_bss.o)
+__bss_start                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/avr5\libgcc.a(_clear_bss.o)
+__data_end                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__data_load_start                                 C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__data_start                                      C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__do_clear_bss                                    C:/WinAVR/bin/../lib/gcc/avr/3.4.1/avr5\libgcc.a(_clear_bss.o)
+                                                  D:/voipsoft/main.o
+__do_copy_data                                    C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+                                                  D:/voipsoft/main.o
+__heap_end                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__init                                            C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__stack                                           C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+                                                  D:/voipsoft/main.o
+__vector_1                                        D:/voipsoft/main.o
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_10                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_11                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_12                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_13                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_14                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_15                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_16                                       D:/voipsoft/main.o
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_17                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_18                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_19                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_2                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_20                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_21                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_22                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_23                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_24                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_25                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_26                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_27                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_28                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_29                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_3                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_30                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_31                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_32                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_33                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_34                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_4                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_5                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_6                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_7                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_8                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_9                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vector_default                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+__vectors                                         C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+_iCommandPos                                      D:/voipsoft/main.o
+_iDataPos                                         D:/voipsoft/main.o
+_iInputHead                                       D:/voipsoft/main.o
+_iInputTail                                       D:/voipsoft/main.o
+_iMode                                            D:/voipsoft/main.o
+_isprint                                          D:/voipsoft/main.o
+_pCommand                                         D:/voipsoft/main.o
+_pData                                            D:/voipsoft/main.o
+_pInputBuf                                        D:/voipsoft/main.o
+_pKey                                             D:/voipsoft/main.o
+clear_screen                                      D:/voipsoft/main.o
+delay_1ms                                         D:/voipsoft/main.o
+delay_1us                                         D:/voipsoft/main.o
+delay_nms                                         D:/voipsoft/main.o
+delay_nus                                         D:/voipsoft/main.o
+i                                                 D:/voipsoft/main.o
+keydata                                           D:/voipsoft/main.o
+main                                              D:/voipsoft/main.o
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.1/../../../../avr/lib/avr5/crtm128.o
+memcmp_c2d                                        D:/voipsoft/main.o
+memcpy_c2d                                        D:/voipsoft/main.o
+memset_d                                          D:/voipsoft/main.o
+nibble_mode                                       D:/voipsoft/main.o
+onekey                                            D:/voipsoft/main.o
+online                                            D:/voipsoft/main.o
+servernum1                                        D:/voipsoft/main.o
+servernum2                                        D:/voipsoft/main.o
+write_data                                        D:/voipsoft/main.o

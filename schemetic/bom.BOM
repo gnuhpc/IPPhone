@@ -1,0 +1,71 @@
+Voip  Revised: Saturday, May 31, 2008
+Connector          Revision: 3.00
+
+
+
+
+
+
+
+Bill Of Materials            May 31,2008      21:43:02	Page1
+
+Item	Quantity	Value		Footprint	Reference
+______________________________________________
+
+1			1		102		0805			C1
+2			35		104		0805			C2,C3,C5,C6,C15,C16,C17,
+										C29,C32,C33,C35,C38,C40,
+										C42,C43,C44,C45,C46,C47,
+										C48,C49,C50,C51,C52,C53,
+										C54,C55,C56,C57,C58,C59,
+										C60,C61,C62,C63
+3			1		473		0805			C4
+4			5		470U		ELED			C7,C8,C11,C12,C13
+5			2		100U		ELED			C9,C14
+6			1		250U		ELED			C10
+7			2		10U		1206			C18,C34
+8			1		1u		0805			C19
+9			4		20p		0805			C20,C21,C22,C23
+10			4		0.1U		1206			C24,C25,C26,C27
+11			6		47U		1206			C28,C30,C31,C37,C39,C41
+12			1		100uF		ELED			C36
+13			2		LED		1206			D1,D2
+14			1		HD10		ISP			ISP1
+15			2		HD5		AUDIO			JJ1,JJ2
+16			1		Jumper		JP60			JP1
+17			2		Jumper		HEADER2			JP2,JP3
+18			1		HD32		H2M2X16			J1
+19			1		RJ45F		RJ45			J2
+20			1		MIC		HEADER2			J3
+21			1		Speaker		HEADER2			J4
+22			1		HEADER 16		J35			J5
+23			1		HEADER 3					J6
+24			3		HD32		HEADER32			J7,J8,J9
+25			1		PowerJack		PowerJack			J10
+26			1		Power		USBD			J11
+27			18		TESTP		TESTPOINT			J12,J13,J14,J15,J16,J17,
+										J18,J19,J20,J21,J22,J23,
+										J24,J25,J26,J31,J32,J33
+28			4		HOLE		HOLE			J27,J28,J29,J30
+29			7		CIZhu		CiZhu			L1,L2,L3,L4,L5,L6,L7
+30			1		CONNECTOR DB9		DSUB/RS.318/TM/9			P1
+31			4		10k		Rpot			RPOT1,RPOT2,RPOT3,RPOT4
+32			1		10K		R0603S			R1
+33			4		75R		0805			R2,R3,R4,R5
+34			1		3k		0805			R6
+35			2		4.7R		0805			R7,R11
+36			1		10R		0805			R8
+37			3		10K		0805			R9,R10,R13
+38			1		1.2k		0805			R12
+39			1		47k		0805			R14
+40			2		1.5k		0805			R15,R16
+41			1		100k		0805			R17
+42			2		RESET		RESET			SW1,SW3
+43			1		SW KEY-SPST					SW2
+44			1		TDA2822		DIP8			U1
+45			1		lm386		DIP8			U2
+46			1		ATmega128L_TQFP64		ATmega128			U3
+47			1		MAX3232/SO		SOG.050/16/WG.244/L.400			U4
+48			1		LM1117MPX5		LM1117			U5
+49			1		LM1117MPX3.3		LM1117			U6
+50			2		Hz		CRYSTAL			Y1,Y2

@@ -1,0 +1,2103 @@
+   1               		.file	"main.c"
+   2               		.arch atmega128
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  11               		.text
+  12               	.Ltext0:
+  49               	.global	servernum2
+  50               		.data
+  53               	servernum2:
+  54 0000 35        		.byte	53
+  55 0001 39        		.byte	57
+  56 0002 36        		.byte	54
+  57 0003 34        		.byte	52
+  58 0004 31        		.byte	49
+  59 0005 31        		.byte	49
+  60 0006 32        		.byte	50
+  61 0007 30        		.byte	48
+  62 0008 61        		.byte	97
+  63               	.global	servernum1
+  66               	servernum1:
+  67 0009 35        		.byte	53
+  68 000a 39        		.byte	57
+  69 000b 36        		.byte	54
+  70 000c 34        		.byte	52
+  71 000d 36        		.byte	54
+  72 000e 35        		.byte	53
+  73 000f 34        		.byte	52
+  74 0010 33        		.byte	51
+  75 0011 61        		.byte	97
+  76               	.global	online
+  79               	online:
+  80 0012 7A        		.byte	122
+  81               	.global	_pKey
+  84               	_pKey:
+  85 0013 4B45 5920 		.string	"KEY "
+  85      00
+  86               	.global	keydata
+  89               	keydata:
+  90 0018 30        		.byte	48
+  91 0019 31        		.byte	49
+  92 001a 32        		.byte	50
+  93 001b 33        		.byte	51
+  94 001c 34        		.byte	52
+  95 001d 35        		.byte	53
+  96 001e 36        		.byte	54
+  97 001f 37        		.byte	55
+  98 0020 38        		.byte	56
+  99 0021 39        		.byte	57
+ 100 0022 2A        		.byte	42
+ 101 0023 23        		.byte	35
+ 102 0024 61        		.byte	97
+ 103 0025 58        		.byte	88
+ 104 0026 5A        		.byte	90
+ 105 0027 7A        		.byte	122
+ 106               		.text
+ 109               	.global	Delay
+ 111               	Delay:
+ 113               	.Ltext1:
+   1:D:/voipsoft/lcd.c **** #include "type.h"
+   2:D:/voipsoft/lcd.c **** #include "sys.h"
+   3:D:/voipsoft/lcd.c **** 
+   4:D:/voipsoft/lcd.c **** 
+   5:D:/voipsoft/lcd.c **** unsigned char keydata[16]=
+   6:D:/voipsoft/lcd.c **** { 
+   7:D:/voipsoft/lcd.c **** 	'0','1','2','3',
+   8:D:/voipsoft/lcd.c **** 	'4','5','6','7',
+   9:D:/voipsoft/lcd.c **** 	'8','9','*','#',
+  10:D:/voipsoft/lcd.c **** 	'a','X','Z','z',
+  11:D:/voipsoft/lcd.c **** };
+  12:D:/voipsoft/lcd.c **** 
+  13:D:/voipsoft/lcd.c **** void Delay(uint32_t time)
+  14:D:/voipsoft/lcd.c **** {
+ 115               	.LM1:
+ 116               	/* prologue: frame size=0 */
+ 117               	/* prologue end (size=0) */
+ 118               	.L7:
+  15:D:/voipsoft/lcd.c **** while(time>0)
+  16:D:/voipsoft/lcd.c ****     {time--;}
+ 120               	.LM2:
+ 121 0000 6115      		cp r22,__zero_reg__
+ 122 0002 7105      		cpc r23,__zero_reg__
+ 123 0004 8105      		cpc r24,__zero_reg__
+ 124 0006 9105      		cpc r25,__zero_reg__
+ 125 0008 29F0      		breq .L6
+ 127               	.LM3:
+ 128 000a 6150      		subi r22,lo8(-(-1))
+ 129 000c 7040      		sbci r23,hi8(-(-1))
+ 130 000e 8040      		sbci r24,hlo8(-(-1))
+ 131 0010 9040      		sbci r25,hhi8(-(-1))
+ 132 0012 F6CF      		rjmp .L7
+ 133               	.L6:
+ 134 0014 0895      		ret
+ 135               	/* epilogue: frame size=0 */
+ 136               	/* epilogue: noreturn */
+ 137               	/* epilogue end (size=0) */
+ 138               	/* function Delay size 11 (11) */
+ 141               	.global	delay_1us
+ 143               	delay_1us:
+  17:D:/voipsoft/lcd.c **** }
+  18:D:/voipsoft/lcd.c **** void delay_1us(void) //1usÑÓÊ±º¯Êý 
+  19:D:/voipsoft/lcd.c **** { 
+ 145               	.LM4:
+ 146               	/* prologue: frame size=0 */
+ 147               	/* prologue end (size=0) */
+  20:D:/voipsoft/lcd.c **** asm("nop"); 
+ 149               	.LM5:
+ 150               	/* #APP */
+ 151 0016 0000      		nop
+ 152               	/* #NOAPP */
+ 153               	/* epilogue: frame size=0 */
+ 154 0018 0895      		ret
+ 155               	/* epilogue end (size=1) */
+ 156               	/* function delay_1us size 3 (2) */
+ 160               	.global	delay_nus
+ 162               	delay_nus:
+  21:D:/voipsoft/lcd.c **** } 
+  22:D:/voipsoft/lcd.c **** 
+  23:D:/voipsoft/lcd.c **** void delay_nus(unsigned int n) //N usÑÓÊ±º¯Êý 
+  24:D:/voipsoft/lcd.c **** { 
+ 164               	.LM6:
+ 165               	/* prologue: frame size=0 */
+ 166 001a CF93      		push r28
+ 167 001c DF93      		push r29
+ 168               	/* prologue end (size=2) */
+  25:D:/voipsoft/lcd.c **** unsigned int i=0; 
+  26:D:/voipsoft/lcd.c **** for (i=0;i<n;i++) 
+ 170               	.LM7:
+ 171 001e 0097      		sbiw r24,0
+ 172 0020 29F0      		breq .L15
+ 173 0022 EC01      		movw r28,r24
+ 174               	.L13:
+  27:D:/voipsoft/lcd.c **** delay_1us(); 
+ 176               	.LM8:
+ 177 0024 0E94 0000 		call delay_1us
+ 179               	.LM9:
+ 180 0028 2197      		sbiw r28,1
+ 181 002a E1F7      		brne .L13
+ 182               	.L15:
+ 183               	/* epilogue: frame size=0 */
+ 184 002c DF91      		pop r29
+ 185 002e CF91      		pop r28
+ 186 0030 0895      		ret
+ 187               	/* epilogue end (size=3) */
+ 188               	/* function delay_nus size 13 (8) */
+ 192               	.global	delay_1ms
+ 194               	delay_1ms:
+  28:D:/voipsoft/lcd.c **** } 
+  29:D:/voipsoft/lcd.c **** 
+  30:D:/voipsoft/lcd.c **** void delay_1ms(void) //1msÑÓÊ±º¯Êý 
+  31:D:/voipsoft/lcd.c **** { 
+ 196               	.LM10:
+ 197               	/* prologue: frame size=0 */
+ 198               	/* prologue end (size=0) */
+ 199 0032 83E7      		ldi r24,lo8(1139)
+ 200 0034 94E0      		ldi r25,hi8(1139)
+ 201               	.L20:
+  32:D:/voipsoft/lcd.c **** unsigned int i; 
+  33:D:/voipsoft/lcd.c **** for (i=0;i<1140;i++); 
+ 203               	.LM11:
+ 204 0036 CC97      		sbiw r24,60
+ 205 0038 97FF      		sbrs r25,7
+ 206 003a FDCF      		rjmp .L20
+ 207               	/* epilogue: frame size=0 */
+ 208 003c 0895      		ret
+ 209               	/* epilogue end (size=1) */
+ 210               	/* function delay_1ms size 6 (5) */
+ 215               	.global	delay_nms
+ 217               	delay_nms:
+  34:D:/voipsoft/lcd.c **** } 
+  35:D:/voipsoft/lcd.c **** 
+  36:D:/voipsoft/lcd.c **** void delay_nms(unsigned int n) //N msÑÓÊ±º¯Êý 
+  37:D:/voipsoft/lcd.c **** { 
+ 219               	.LM12:
+ 220               	/* prologue: frame size=0 */
+ 221 003e CF93      		push r28
+ 222 0040 DF93      		push r29
+ 223               	/* prologue end (size=2) */
+  38:D:/voipsoft/lcd.c **** unsigned int i=0; 
+  39:D:/voipsoft/lcd.c **** for (i=0;i<n;i++) 
+ 225               	.LM13:
+ 226 0042 0097      		sbiw r24,0
+ 227 0044 29F0      		breq .L149
+ 228 0046 EC01      		movw r28,r24
+ 229               	.L147:
+  40:D:/voipsoft/lcd.c **** delay_1ms(); 
+ 231               	.LM14:
+ 232 0048 0E94 0000 		call delay_1ms
+ 234               	.LM15:
+ 235 004c 2197      		sbiw r28,1
+ 236 004e E1F7      		brne .L147
+ 237               	.L149:
+ 238               	/* epilogue: frame size=0 */
+ 239 0050 DF91      		pop r29
+ 240 0052 CF91      		pop r28
+ 241 0054 0895      		ret
+ 242               	/* epilogue end (size=3) */
+ 243               	/* function delay_nms size 13 (8) */
+ 247               	.global	En_Toggle
+ 249               	En_Toggle:
+  41:D:/voipsoft/lcd.c **** }
+  42:D:/voipsoft/lcd.c **** 
+  43:D:/voipsoft/lcd.c **** void En_Toggle(void)
+  44:D:/voipsoft/lcd.c **** {
+ 251               	.LM16:
+ 252               	/* prologue: frame size=0 */
+ 253               	/* prologue end (size=0) */
+  45:D:/voipsoft/lcd.c ****  delaytda;
+ 255               	.LM17:
+ 256 0056 6AE0      		ldi r22,lo8(10)
+ 257 0058 70E0      		ldi r23,hi8(10)
+ 258 005a 80E0      		ldi r24,hlo8(10)
+ 259 005c 90E0      		ldi r25,hhi8(10)
+ 260 005e 0E94 0000 		call Delay
+  46:D:/voipsoft/lcd.c ****  sbi(LCDPORT,3);
+ 262               	.LM18:
+ 263 0062 AB9A      		sbi 53-0x20,3
+  47:D:/voipsoft/lcd.c ****  delayte;
+ 265               	.LM19:
+ 266 0064 64E1      		ldi r22,lo8(20)
+ 267 0066 70E0      		ldi r23,hi8(20)
+ 268 0068 80E0      		ldi r24,hlo8(20)
+ 269 006a 90E0      		ldi r25,hhi8(20)
+ 270 006c 0E94 0000 		call Delay
+  48:D:/voipsoft/lcd.c ****  cbi(LCDPORT,3);
+ 272               	.LM20:
+ 273 0070 AB98      		cbi 53-0x20,3
+  49:D:/voipsoft/lcd.c ****  delayte;
+ 275               	.LM21:
+ 276 0072 64E1      		ldi r22,lo8(20)
+ 277 0074 70E0      		ldi r23,hi8(20)
+ 278 0076 80E0      		ldi r24,hlo8(20)
+ 279 0078 90E0      		ldi r25,hhi8(20)
+ 280 007a 0E94 0000 		call Delay
+ 281               	/* epilogue: frame size=0 */
+ 282 007e 0895      		ret
+ 283               	/* epilogue end (size=1) */
+ 284               	/* function En_Toggle size 21 (20) */
+ 287               	.global	nibble_mode
+ 289               	nibble_mode:
+  50:D:/voipsoft/lcd.c **** }
+  51:D:/voipsoft/lcd.c **** 
+  52:D:/voipsoft/lcd.c **** void nibble_mode(void)
+  53:D:/voipsoft/lcd.c **** {
+ 291               	.LM22:
+ 292               	/* prologue: frame size=0 */
+ 293               	/* prologue end (size=0) */
+  54:D:/voipsoft/lcd.c **** LCDPORT=0x39;
+ 295               	.LM23:
+ 296 0080 89E3      		ldi r24,lo8(57)
+ 297 0082 85BB      		out 53-0x20,r24
+  55:D:/voipsoft/lcd.c **** LCDDDR=0xff;
+ 299               	.LM24:
+ 300 0084 8FEF      		ldi r24,lo8(-1)
+ 301 0086 84BB      		out 52-0x20,r24
+  56:D:/voipsoft/lcd.c **** En_Toggle();
+ 303               	.LM25:
+ 304 0088 0E94 0000 		call En_Toggle
+  57:D:/voipsoft/lcd.c **** delaytfun;
+ 306               	.LM26:
+ 307 008c 68EE      		ldi r22,lo8(1000)
+ 308 008e 73E0      		ldi r23,hi8(1000)
+ 309 0090 80E0      		ldi r24,hlo8(1000)
+ 310 0092 90E0      		ldi r25,hhi8(1000)
+ 311 0094 0E94 0000 		call Delay
+  58:D:/voipsoft/lcd.c **** En_Toggle();
+ 313               	.LM27:
+ 314 0098 0E94 0000 		call En_Toggle
+  59:D:/voipsoft/lcd.c **** delaytfun;
+ 316               	.LM28:
+ 317 009c 68EE      		ldi r22,lo8(1000)
+ 318 009e 73E0      		ldi r23,hi8(1000)
+ 319 00a0 80E0      		ldi r24,hlo8(1000)
+ 320 00a2 90E0      		ldi r25,hhi8(1000)
+ 321 00a4 0E94 0000 		call Delay
+  60:D:/voipsoft/lcd.c **** En_Toggle();
+ 323               	.LM29:
+ 324 00a8 0E94 0000 		call En_Toggle
+  61:D:/voipsoft/lcd.c **** delaytfun;
+ 326               	.LM30:
+ 327 00ac 68EE      		ldi r22,lo8(1000)
+ 328 00ae 73E0      		ldi r23,hi8(1000)
+ 329 00b0 80E0      		ldi r24,hlo8(1000)
+ 330 00b2 90E0      		ldi r25,hhi8(1000)
+ 331 00b4 0E94 0000 		call Delay
+  62:D:/voipsoft/lcd.c **** 
+  63:D:/voipsoft/lcd.c **** LCDPORT=0x21;
+ 333               	.LM31:
+ 334 00b8 81E2      		ldi r24,lo8(33)
+ 335 00ba 85BB      		out 53-0x20,r24
+  64:D:/voipsoft/lcd.c **** En_Toggle();
+ 337               	.LM32:
+ 338 00bc 0E94 0000 		call En_Toggle
+  65:D:/voipsoft/lcd.c **** delaytfun;
+ 340               	.LM33:
+ 341 00c0 68EE      		ldi r22,lo8(1000)
+ 342 00c2 73E0      		ldi r23,hi8(1000)
+ 343 00c4 80E0      		ldi r24,hlo8(1000)
+ 344 00c6 90E0      		ldi r25,hhi8(1000)
+ 345 00c8 0E94 0000 		call Delay
+ 346               	/* epilogue: frame size=0 */
+ 347 00cc 0895      		ret
+ 348               	/* epilogue end (size=1) */
+ 349               	/* function nibble_mode size 39 (38) */
+ 353               	.global	Write_Command
+ 355               	Write_Command:
+  66:D:/voipsoft/lcd.c **** }
+  67:D:/voipsoft/lcd.c **** 
+  68:D:/voipsoft/lcd.c **** void Write_Command(uint8_t Command)
+  69:D:/voipsoft/lcd.c **** {
+ 357               	.LM34:
+ 358               	/* prologue: frame size=0 */
+ 359 00ce 1F93      		push r17
+ 360               	/* prologue end (size=1) */
+  70:D:/voipsoft/lcd.c **** uint8_t Commandh,Commandl;
+  71:D:/voipsoft/lcd.c **** Commandh=Command&0xf0;
+  72:D:/voipsoft/lcd.c **** Commandl=Command&0x0f;
+ 362               	.LM35:
+ 363 00d0 182F      		mov r17,r24
+ 364 00d2 1F70      		andi r17,lo8(15)
+  73:D:/voipsoft/lcd.c **** LCDDDR=0xff;
+ 366               	.LM36:
+ 367 00d4 9FEF      		ldi r25,lo8(-1)
+ 368 00d6 94BB      		out 52-0x20,r25
+ 369 00d8 807F      		andi r24,lo8(-16)
+  74:D:/voipsoft/lcd.c **** LCDPORT=(Commandh|0x01);
+ 371               	.LM37:
+ 372 00da 8160      		ori r24,lo8(1)
+ 373 00dc 85BB      		out 53-0x20,r24
+  75:D:/voipsoft/lcd.c **** En_Toggle();
+ 375               	.LM38:
+ 376 00de 0E94 0000 		call En_Toggle
+  76:D:/voipsoft/lcd.c **** LCDPORT=((Commandl<<4)|0x01);
+ 378               	.LM39:
+ 379 00e2 812F      		mov r24,r17
+ 380 00e4 9927      		clr r25
+ 381 00e6 24E0      		ldi r18,4
+ 382 00e8 880F      	1:	lsl r24
+ 383 00ea 991F      		rol r25
+ 384 00ec 2A95      		dec r18
+ 385 00ee E1F7      		brne 1b
+ 386 00f0 8160      		ori r24,lo8(1)
+ 387 00f2 85BB      		out 53-0x20,r24
+  77:D:/voipsoft/lcd.c **** En_Toggle();
+ 389               	.LM40:
+ 390 00f4 0E94 0000 		call En_Toggle
+  78:D:/voipsoft/lcd.c **** delaytfun;
+ 392               	.LM41:
+ 393 00f8 68EE      		ldi r22,lo8(1000)
+ 394 00fa 73E0      		ldi r23,hi8(1000)
+ 395 00fc 80E0      		ldi r24,hlo8(1000)
+ 396 00fe 90E0      		ldi r25,hhi8(1000)
+ 397 0100 0E94 0000 		call Delay
+ 398               	/* epilogue: frame size=0 */
+ 399 0104 1F91      		pop r17
+ 400 0106 0895      		ret
+ 401               	/* epilogue end (size=2) */
+ 402               	/* function Write_Command size 29 (26) */
+ 408               	.global	Write_Position
+ 410               	Write_Position:
+  79:D:/voipsoft/lcd.c **** }
+  80:D:/voipsoft/lcd.c **** 
+  81:D:/voipsoft/lcd.c **** void Write_Position(uint8_t row,uint8_t colum)
+  82:D:/voipsoft/lcd.c ****  {
+ 412               	.LM42:
+ 413               	/* prologue: frame size=0 */
+ 414               	/* prologue end (size=0) */
+  83:D:/voipsoft/lcd.c ****   uint8_t p;
+  84:D:/voipsoft/lcd.c ****   if(row==1)
+ 416               	.LM43:
+ 417 0108 8130      		cpi r24,lo8(1)
+ 418 010a 19F4      		brne .L154
+  85:D:/voipsoft/lcd.c ****     {
+  86:D:/voipsoft/lcd.c **** 	p=0x80+colum-1;
+  87:D:/voipsoft/lcd.c **** 	Write_Command(p);
+ 420               	.LM44:
+ 421 010c 862F      		mov r24,r22
+ 422 010e 8158      		subi r24,lo8(-(127))
+ 423 0110 02C0      		rjmp .L156
+ 424               	.L154:
+  88:D:/voipsoft/lcd.c **** 	}
+  89:D:/voipsoft/lcd.c ****   else
+  90:D:/voipsoft/lcd.c ****   {p=0xc0+colum-1;
+  91:D:/voipsoft/lcd.c ****   Write_Command(p);
+ 426               	.LM45:
+ 427 0112 862F      		mov r24,r22
+ 428 0114 8154      		subi r24,lo8(-(-65))
+ 429               	.L156:
+ 430 0116 0E94 0000 		call Write_Command
+ 431 011a 0895      		ret
+ 432               	/* epilogue: frame size=0 */
+ 433 011c 0895      		ret
+ 434               	/* epilogue end (size=1) */
+ 435               	/* function Write_Position size 11 (10) */
+ 439               	.global	write_data
+ 441               	write_data:
+  92:D:/voipsoft/lcd.c ****   }
+  93:D:/voipsoft/lcd.c ****  }
+  94:D:/voipsoft/lcd.c ****  
+  95:D:/voipsoft/lcd.c ****  void write_data(uint8_t Data)
+  96:D:/voipsoft/lcd.c **** {
+ 443               	.LM46:
+ 444               	/* prologue: frame size=0 */
+ 445 011e 1F93      		push r17
+ 446               	/* prologue end (size=1) */
+ 447 0120 182F      		mov r17,r24
+  97:D:/voipsoft/lcd.c ****   LCDDDR=0xff;
+ 449               	.LM47:
+ 450 0122 8FEF      		ldi r24,lo8(-1)
+ 451 0124 84BB      		out 52-0x20,r24
+  98:D:/voipsoft/lcd.c ****   LCDPORT=((Data&0xf0)|0x05);
+ 453               	.LM48:
+ 454 0126 812F      		mov r24,r17
+ 455 0128 807F      		andi r24,lo8(-16)
+ 456 012a 8560      		ori r24,lo8(5)
+ 457 012c 85BB      		out 53-0x20,r24
+  99:D:/voipsoft/lcd.c ****   En_Toggle();
+ 459               	.LM49:
+ 460 012e 0E94 0000 		call En_Toggle
+ 100:D:/voipsoft/lcd.c ****   LCDPORT=((Data&0x0f)<<4|0x05);
+ 462               	.LM50:
+ 463 0132 812F      		mov r24,r17
+ 464 0134 9927      		clr r25
+ 465 0136 8F70      		andi r24,lo8(15)
+ 466 0138 9070      		andi r25,hi8(15)
+ 467 013a 34E0      		ldi r19,4
+ 468 013c 880F      	1:	lsl r24
+ 469 013e 991F      		rol r25
+ 470 0140 3A95      		dec r19
+ 471 0142 E1F7      		brne 1b
+ 472 0144 8560      		ori r24,lo8(5)
+ 473 0146 85BB      		out 53-0x20,r24
+ 101:D:/voipsoft/lcd.c ****   En_Toggle();
+ 475               	.LM51:
+ 476 0148 0E94 0000 		call En_Toggle
+ 102:D:/voipsoft/lcd.c ****   delaytfun;
+ 478               	.LM52:
+ 479 014c 68EE      		ldi r22,lo8(1000)
+ 480 014e 73E0      		ldi r23,hi8(1000)
+ 481 0150 80E0      		ldi r24,hlo8(1000)
+ 482 0152 90E0      		ldi r25,hhi8(1000)
+ 483 0154 0E94 0000 		call Delay
+ 484               	/* epilogue: frame size=0 */
+ 485 0158 1F91      		pop r17
+ 486 015a 0895      		ret
+ 487               	/* epilogue end (size=2) */
+ 488               	/* function write_data size 31 (28) */
+ 492               	.global	Write_String
+ 494               	Write_String:
+ 103:D:/voipsoft/lcd.c **** }
+ 104:D:/voipsoft/lcd.c **** 
+ 105:D:/voipsoft/lcd.c **** void Write_String(uint8_t *s)
+ 106:D:/voipsoft/lcd.c ****  {
+ 496               	.LM53:
+ 497               	/* prologue: frame size=0 */
+ 498 015c CF93      		push r28
+ 499 015e DF93      		push r29
+ 500               	/* prologue end (size=2) */
+ 501 0160 EC01      		movw r28,r24
+ 107:D:/voipsoft/lcd.c ****    for(;*s!='\0';s++)write_data(*s);
+ 503               	.LM54:
+ 504 0162 8881      		ld r24,Y
+ 505 0164 8823      		tst r24
+ 506 0166 31F0      		breq .L164
+ 507               	.L162:
+ 509               	.LM55:
+ 510 0168 8991      		ld r24,Y+
+ 511 016a 0E94 0000 		call write_data
+ 512 016e 8881      		ld r24,Y
+ 513 0170 8823      		tst r24
+ 514 0172 D1F7      		brne .L162
+ 515               	.L164:
+ 516               	/* epilogue: frame size=0 */
+ 517 0174 DF91      		pop r29
+ 518 0176 CF91      		pop r28
+ 519 0178 0895      		ret
+ 520               	/* epilogue end (size=3) */
+ 521               	/* function Write_String size 15 (10) */
+ 524               	.global	clear_screen
+ 526               	clear_screen:
+ 108:D:/voipsoft/lcd.c ****  }
+ 109:D:/voipsoft/lcd.c ****  
+ 110:D:/voipsoft/lcd.c ****  
+ 111:D:/voipsoft/lcd.c ****  void clear_screen(void)
+ 112:D:/voipsoft/lcd.c ****  {
+ 528               	.LM56:
+ 529               	/* prologue: frame size=0 */
+ 530               	/* prologue end (size=0) */
+ 113:D:/voipsoft/lcd.c ****  Write_Command(0x01);
+ 532               	.LM57:
+ 533 017a 81E0      		ldi r24,lo8(1)
+ 534 017c 0E94 0000 		call Write_Command
+ 114:D:/voipsoft/lcd.c ****  Delay(10000);
+ 536               	.LM58:
+ 537 0180 60E1      		ldi r22,lo8(10000)
+ 538 0182 77E2      		ldi r23,hi8(10000)
+ 539 0184 80E0      		ldi r24,hlo8(10000)
+ 540 0186 90E0      		ldi r25,hhi8(10000)
+ 541 0188 0E94 0000 		call Delay
+ 542               	/* epilogue: frame size=0 */
+ 543 018c 0895      		ret
+ 544               	/* epilogue end (size=1) */
+ 545               	/* function clear_screen size 10 (9) */
+ 548               	.global	Initialize_LCD
+ 550               	Initialize_LCD:
+ 115:D:/voipsoft/lcd.c ****  }
+ 116:D:/voipsoft/lcd.c ****  
+ 117:D:/voipsoft/lcd.c ****  void Initialize_LCD(void)
+ 118:D:/voipsoft/lcd.c ****  {
+ 552               	.LM59:
+ 553               	/* prologue: frame size=0 */
+ 554               	/* prologue end (size=0) */
+ 119:D:/voipsoft/lcd.c ****   nibble_mode();
+ 556               	.LM60:
+ 557 018e 0E94 0000 		call nibble_mode
+ 120:D:/voipsoft/lcd.c ****   Write_Command(0X28);
+ 559               	.LM61:
+ 560 0192 88E2      		ldi r24,lo8(40)
+ 561 0194 0E94 0000 		call Write_Command
+ 121:D:/voipsoft/lcd.c ****   clear_screen();
+ 563               	.LM62:
+ 564 0198 0E94 0000 		call clear_screen
+ 122:D:/voipsoft/lcd.c ****   Write_Command(0X06);
+ 566               	.LM63:
+ 567 019c 86E0      		ldi r24,lo8(6)
+ 568 019e 0E94 0000 		call Write_Command
+ 123:D:/voipsoft/lcd.c ****   Write_Command(0X0c);
+ 570               	.LM64:
+ 571 01a2 8CE0      		ldi r24,lo8(12)
+ 572 01a4 0E94 0000 		call Write_Command
+ 573               	/* epilogue: frame size=0 */
+ 574 01a8 0895      		ret
+ 575               	/* epilogue end (size=1) */
+ 576               	/* function Initialize_LCD size 14 (13) */
+ 578               		.lcomm ScanCode.0,1
+ 579               		.lcomm TempNum.1,1
+ 580               		.lcomm LastNum.2,1
+ 581               		.lcomm CurrentNum.3,1
+ 582               		.lcomm Times.4,1
+ 584               	.global	Keyboard
+ 586               	Keyboard:
+ 124:D:/voipsoft/lcd.c ****   }
+ 125:D:/voipsoft/lcd.c ****   
+ 126:D:/voipsoft/lcd.c **** 
+ 127:D:/voipsoft/lcd.c **** /* ´Ëº¯ÊýÃ¿´ÎÖ´ÐÐ¶¼²úÉúÒ»¸öÉ¨ÃèÐÅºÅ£¨ËÄÎ»£¬ÈÎÒ»Ê±¿ÌÖ»ÓÐÒ»Î»Îª '0'£©¼ÓÓÚÁÐÏßÉÏ£¬Í¬Ê±¶ÁÈ¡ÐÐÏßÉÏµÄµçÆ½
+ 128:D:/voipsoft/lcd.c **** 
+ 129:D:/voipsoft/lcd.c **** /*×¢£º´Ëº¯ÊýÒ»°ãÓÃÓÚ¶¨Ê±Æ÷ÖÐ¶ÏÖÐ»òÖ÷Ñ­»·ÖÐ£¬¼´±¾º¯ÊýÐè¸ôÒ»¶¨µÄÊ±¼ä£¨10msÎªÒË£©±»Ö´ÐÐÒ»´Î£¬²ÅÄÜÆðµ½¼
+ 130:D:/voipsoft/lcd.c **** 
+ 131:D:/voipsoft/lcd.c **** uint8_t Keyboard(void)   //¼üÅÌÉ¨Ãèº¯Êý£¬·µ»ØÒ»¸ö¼üÖµ»ò16£¨ÎÞÐ§Öµ£©
+ 132:D:/voipsoft/lcd.c **** {
+ 588               	.LM65:
+ 589               	/* prologue: frame size=0 */
+ 590               	/* prologue end (size=0) */
+ 133:D:/voipsoft/lcd.c ****    static uint8_t ScanCode,TempNum, LastNum,CurrentNum,Times;
+ 134:D:/voipsoft/lcd.c ****    
+ 135:D:/voipsoft/lcd.c ****    switch(ScanCode)   // É¨ÃèÐÅºÅ
+ 592               	.LM66:
+ 593 01aa 8091 0000 		lds r24,ScanCode.0
+ 594 01ae 9927      		clr r25
+ 595 01b0 8B3F      		cpi r24,251
+ 596 01b2 9105      		cpc r25,__zero_reg__
+ 597 01b4 69F0      		breq .L170
+ 599               	.LM67:
+ 600 01b6 8C3F      		cpi r24,252
+ 601 01b8 9105      		cpc r25,__zero_reg__
+ 602 01ba 24F4      		brge .L174
+ 603 01bc 873F      		cpi r24,247
+ 604 01be 9105      		cpc r25,__zero_reg__
+ 605 01c0 29F0      		breq .L169
+ 606 01c2 0AC0      		rjmp .L173
+ 607               	.L174:
+ 608 01c4 8D3F      		cpi r24,253
+ 609 01c6 9105      		cpc r25,__zero_reg__
+ 610 01c8 29F0      		breq .L171
+ 611 01ca 06C0      		rjmp .L173
+ 612               	.L169:
+ 136:D:/voipsoft/lcd.c ****    	{
+ 137:D:/voipsoft/lcd.c ****    	  case 0xF7:ScanCode=0xFB; break;   //É¨ÃèÐÅºÅ£º0111¡ú1011
+ 614               	.LM68:
+ 615 01cc 8BEF      		ldi r24,lo8(-5)
+ 616 01ce 05C0      		rjmp .L203
+ 617               	.L170:
+ 138:D:/voipsoft/lcd.c ****       case 0xFB:ScanCode=0xFD; break;  // 1011¡ú1101
+ 619               	.LM69:
+ 620 01d0 8DEF      		ldi r24,lo8(-3)
+ 621 01d2 03C0      		rjmp .L203
+ 622               	.L171:
+ 139:D:/voipsoft/lcd.c ****       case 0xFD:ScanCode=0xFE; break;  // 1101¡ú1110
+ 624               	.LM70:
+ 625 01d4 8EEF      		ldi r24,lo8(-2)
+ 626 01d6 01C0      		rjmp .L203
+ 627               	.L173:
+ 140:D:/voipsoft/lcd.c ****       case 0xFE:ScanCode=0xF7; break;  // 1110¡ú0111
+ 141:D:/voipsoft/lcd.c ****       default: ScanCode=0xF7;break;
+ 629               	.LM71:
+ 630 01d8 87EF      		ldi r24,lo8(-9)
+ 631               	.L203:
+ 632 01da 8093 0000 		sts ScanCode.0,r24
+ 142:D:/voipsoft/lcd.c ****    	}
+ 143:D:/voipsoft/lcd.c **** 
+ 144:D:/voipsoft/lcd.c ****    /*ÔÚmain()º¯ÊýÀïÐè½«DDRCÉè³É0x0F£¬¼´PC7~PC4ÎªÊäÈë£¬PC3~PC0ÎªÊä³ö¡£
+ 145:D:/voipsoft/lcd.c ****     ÏÂÃæPORTC=ScanCodeÒâÎ¶×Å£¬½«PC7~PC4ÉèÎª´øÉÏÀ­¹¦ÄÜµÄÊäÈë£¬
+ 146:D:/voipsoft/lcd.c ****     ¶øPC3~PC0Êä³öÉ¨ÃèÐÅºÅ¡£*/
+ 147:D:/voipsoft/lcd.c ****    PORTA=ScanCode;
+ 634               	.LM72:
+ 635 01de 8091 0000 		lds r24,ScanCode.0
+ 636 01e2 8BBB      		out 59-0x20,r24
+ 148:D:/voipsoft/lcd.c **** 
+ 149:D:/voipsoft/lcd.c ****    switch(PINA)  // ½â¶ÁÐÐÁÐµçÆ½ÖµÓë°´¼üÖµµÄ¹ØÏµ
+ 638               	.LM73:
+ 639 01e4 89B3      		in r24,57-0x20
+ 640 01e6 9927      		clr r25
+ 641 01e8 8E3B      		cpi r24,190
+ 642 01ea 9105      		cpc r25,__zero_reg__
+ 643 01ec 09F4      		brne .+2
+ 644 01ee 62C0      		rjmp .L185
+ 645 01f0 8F3B      		cpi r24,191
+ 646 01f2 9105      		cpc r25,__zero_reg__
+ 647 01f4 44F5      		brge .L194
+ 648 01f6 8E37      		cpi r24,126
+ 649 01f8 9105      		cpc r25,__zero_reg__
+ 650 01fa 09F4      		brne .+2
+ 651 01fc 51C0      		rjmp .L180
+ 652 01fe 8F37      		cpi r24,127
+ 653 0200 9105      		cpc r25,__zero_reg__
+ 654 0202 84F4      		brge .L195
+ 655 0204 8B37      		cpi r24,123
+ 656 0206 9105      		cpc r25,__zero_reg__
+ 657 0208 09F4      		brne .+2
+ 658 020a 5FC0      		rjmp .L190
+ 659 020c 8C37      		cpi r24,124
+ 660 020e 9105      		cpc r25,__zero_reg__
+ 661 0210 24F4      		brge .L196
+ 662 0212 8737      		cpi r24,119
+ 663 0214 9105      		cpc r25,__zero_reg__
+ 664 0216 E1F1      		breq .L176
+ 665 0218 60C0      		rjmp .L192
+ 666               	.L196:
+ 667 021a 8D37      		cpi r24,125
+ 668 021c 9105      		cpc r25,__zero_reg__
+ 669 021e 09F4      		brne .+2
+ 670 0220 52C0      		rjmp .L189
+ 671 0222 5BC0      		rjmp .L192
+ 672               	.L195:
+ 673 0224 8B3B      		cpi r24,187
+ 674 0226 9105      		cpc r25,__zero_reg__
+ 675 0228 09F4      		brne .+2
+ 676 022a 47C0      		rjmp .L186
+ 677 022c 8C3B      		cpi r24,188
+ 678 022e 9105      		cpc r25,__zero_reg__
+ 679 0230 2CF4      		brge .L197
+ 680 0232 873B      		cpi r24,183
+ 681 0234 9105      		cpc r25,__zero_reg__
+ 682 0236 09F4      		brne .+2
+ 683 0238 42C0      		rjmp .L187
+ 684 023a 4FC0      		rjmp .L192
+ 685               	.L197:
+ 686 023c 8D3B      		cpi r24,189
+ 687 023e 9105      		cpc r25,__zero_reg__
+ 688 0240 09F4      		brne .+2
+ 689 0242 45C0      		rjmp .L191
+ 690 0244 4AC0      		rjmp .L192
+ 691               	.L194:
+ 692 0246 8E3D      		cpi r24,222
+ 693 0248 9105      		cpc r25,__zero_reg__
+ 694 024a 61F1      		breq .L181
+ 695 024c 8F3D      		cpi r24,223
+ 696 024e 9105      		cpc r25,__zero_reg__
+ 697 0250 74F4      		brge .L198
+ 698 0252 8B3D      		cpi r24,219
+ 699 0254 9105      		cpc r25,__zero_reg__
+ 700 0256 51F1      		breq .L183
+ 701 0258 8C3D      		cpi r24,220
+ 702 025a 9105      		cpc r25,__zero_reg__
+ 703 025c 24F4      		brge .L199
+ 704 025e 873D      		cpi r24,215
+ 705 0260 9105      		cpc r25,__zero_reg__
+ 706 0262 31F1      		breq .L184
+ 707 0264 3AC0      		rjmp .L192
+ 708               	.L199:
+ 709 0266 8D3D      		cpi r24,221
+ 710 0268 9105      		cpc r25,__zero_reg__
+ 711 026a F1F0      		breq .L182
+ 712 026c 36C0      		rjmp .L192
+ 713               	.L198:
+ 714 026e 8B3E      		cpi r24,235
+ 715 0270 9105      		cpc r25,__zero_reg__
+ 716 0272 A1F0      		breq .L179
+ 717 0274 8C3E      		cpi r24,236
+ 718 0276 9105      		cpc r25,__zero_reg__
+ 719 0278 24F4      		brge .L200
+ 720 027a 873E      		cpi r24,231
+ 721 027c 9105      		cpc r25,__zero_reg__
+ 722 027e 09F1      		breq .L188
+ 723 0280 2CC0      		rjmp .L192
+ 724               	.L200:
+ 725 0282 8D3E      		cpi r24,237
+ 726 0284 9105      		cpc r25,__zero_reg__
+ 727 0286 41F0      		breq .L178
+ 728 0288 8E3E      		cpi r24,238
+ 729 028a 9105      		cpc r25,__zero_reg__
+ 730 028c 19F0      		breq .L177
+ 731 028e 25C0      		rjmp .L192
+ 732               	.L176:
+ 150:D:/voipsoft/lcd.c ****   	{ 
+ 151:D:/voipsoft/lcd.c **** /*TempNum¼ÇÂ¼¶Áµ½µÄ¼üÖµ£¬ÓÉÓÚ´Ë¼üÖµÐè¾­½øÒ»²½´¦Àí£¬
+ 152:D:/voipsoft/lcd.c **** ËùÒÔÊÇÔÝÊ±ÊýÖµ£¨TempNum£©¡£TimesÓÃÒÔ¼ÇÂ¼Ã»ÓÐ¶Áµ½ÓÐÐ§¼üÖµµÄ´ÎÊý£¬
+ 153:D:/voipsoft/lcd.c **** Èç¹û´ÎÊý´ïµ½4´Î£¨¼´É¨ÃèÒ»ÂÖºóÃ»ÓÐ·¢ÏÖÓÐÐ§¼üÖµ£©£¬
+ 154:D:/voipsoft/lcd.c **** ¾Í±íÊ¾Ã»ÓÐ¼ü°´ÏÂ¡£*/   	  
+ 155:D:/voipsoft/lcd.c **** 	  case 0x77:TempNum=1;Times=0;break; //
+ 734               	.LM74:
+ 735 0290 81E0      		ldi r24,lo8(1)
+ 736 0292 1EC0      		rjmp .L204
+ 737               	.L177:
+ 156:D:/voipsoft/lcd.c ****       case 0xEE:TempNum=15;Times=0;break; //11101110
+ 739               	.LM75:
+ 740 0294 8FE0      		ldi r24,lo8(15)
+ 741 0296 1CC0      		rjmp .L204
+ 742               	.L178:
+ 157:D:/voipsoft/lcd.c **** 	  case 0xED:TempNum=14;Times=0;break; //11101101
+ 744               	.LM76:
+ 745 0298 8EE0      		ldi r24,lo8(14)
+ 746 029a 1AC0      		rjmp .L204
+ 747               	.L179:
+ 158:D:/voipsoft/lcd.c **** 	  case 0xEB:TempNum=13;Times=0;break; //11101010
+ 749               	.LM77:
+ 750 029c 8DE0      		ldi r24,lo8(13)
+ 751 029e 18C0      		rjmp .L204
+ 752               	.L180:
+ 159:D:/voipsoft/lcd.c **** 	  case 0x7E:TempNum=10;Times=0;break; 
+ 754               	.LM78:
+ 755 02a0 8AE0      		ldi r24,lo8(10)
+ 756 02a2 16C0      		rjmp .L204
+ 757               	.L181:
+ 160:D:/voipsoft/lcd.c **** 	  case 0xDE:TempNum=11;Times=0;break;
+ 759               	.LM79:
+ 760 02a4 8BE0      		ldi r24,lo8(11)
+ 761 02a6 14C0      		rjmp .L204
+ 762               	.L182:
+ 161:D:/voipsoft/lcd.c **** 	  case 0xDD:TempNum=9;Times=0;break;
+ 764               	.LM80:
+ 765 02a8 89E0      		ldi r24,lo8(9)
+ 766 02aa 12C0      		rjmp .L204
+ 767               	.L183:
+ 162:D:/voipsoft/lcd.c **** 	  case 0xDB:TempNum=6;Times=0;break;
+ 769               	.LM81:
+ 770 02ac 86E0      		ldi r24,lo8(6)
+ 771 02ae 10C0      		rjmp .L204
+ 772               	.L184:
+ 163:D:/voipsoft/lcd.c **** 	  case 0xD7:TempNum=3;Times=0;break;
+ 774               	.LM82:
+ 775 02b0 83E0      		ldi r24,lo8(3)
+ 776 02b2 0EC0      		rjmp .L204
+ 777               	.L185:
+ 164:D:/voipsoft/lcd.c **** 	  case 0xBE:TempNum=0;Times=0;break;
+ 779               	.LM83:
+ 780 02b4 1092 0000 		sts TempNum.1,__zero_reg__
+ 781 02b8 0DC0      		rjmp .L205
+ 782               	.L186:
+ 165:D:/voipsoft/lcd.c **** 	  case 0xBB:TempNum=5;Times=0;break;
+ 784               	.LM84:
+ 785 02ba 85E0      		ldi r24,lo8(5)
+ 786 02bc 09C0      		rjmp .L204
+ 787               	.L187:
+ 166:D:/voipsoft/lcd.c **** 	  case 0xB7:TempNum=2;Times=0;break;
+ 789               	.LM85:
+ 790 02be 82E0      		ldi r24,lo8(2)
+ 791 02c0 07C0      		rjmp .L204
+ 792               	.L188:
+ 167:D:/voipsoft/lcd.c **** 	  case 0xE7:TempNum=12;Times=0;break;
+ 794               	.LM86:
+ 795 02c2 8CE0      		ldi r24,lo8(12)
+ 796 02c4 05C0      		rjmp .L204
+ 797               	.L189:
+ 168:D:/voipsoft/lcd.c **** 	  case 0x7D:TempNum=7;Times=0;break;
+ 799               	.LM87:
+ 800 02c6 87E0      		ldi r24,lo8(7)
+ 801 02c8 03C0      		rjmp .L204
+ 802               	.L190:
+ 169:D:/voipsoft/lcd.c **** 	  case 0x7B:TempNum=4;Times=0;break;
+ 804               	.LM88:
+ 805 02ca 84E0      		ldi r24,lo8(4)
+ 806 02cc 01C0      		rjmp .L204
+ 807               	.L191:
+ 170:D:/voipsoft/lcd.c **** 	  case 0xBD:TempNum=8;Times=0;break;
+ 809               	.LM89:
+ 810 02ce 88E0      		ldi r24,lo8(8)
+ 811               	.L204:
+ 812 02d0 8093 0000 		sts TempNum.1,r24
+ 813               	.L205:
+ 814 02d4 1092 0000 		sts Times.4,__zero_reg__
+ 815 02d8 0CC0      		rjmp .L175
+ 816               	.L192:
+ 171:D:/voipsoft/lcd.c ****       default:
+ 172:D:/voipsoft/lcd.c **** 			   Times++;
+ 818               	.LM90:
+ 819 02da 8091 0000 		lds r24,Times.4
+ 820 02de 8F5F      		subi r24,lo8(-(1))
+ 821 02e0 8093 0000 		sts Times.4,r24
+ 173:D:/voipsoft/lcd.c **** 			   if(Times >= 4)
+ 823               	.LM91:
+ 824 02e4 8430      		cpi r24,lo8(4)
+ 825 02e6 28F0      		brlo .L175
+ 174:D:/voipsoft/lcd.c **** 			   {
+ 175:D:/voipsoft/lcd.c **** 				Times = 0;
+ 827               	.LM92:
+ 828 02e8 1092 0000 		sts Times.4,__zero_reg__
+ 176:D:/voipsoft/lcd.c **** 				TempNum=16;
+ 830               	.LM93:
+ 831 02ec 80E1      		ldi r24,lo8(16)
+ 832 02ee 8093 0000 		sts TempNum.1,r24
+ 833               	.L175:
+ 177:D:/voipsoft/lcd.c **** 			   }
+ 178:D:/voipsoft/lcd.c **** 
+ 179:D:/voipsoft/lcd.c **** 	}
+ 180:D:/voipsoft/lcd.c **** 	LastNum = CurrentNum;
+ 835               	.LM94:
+ 836 02f2 8091 0000 		lds r24,CurrentNum.3
+ 837 02f6 8093 0000 		sts LastNum.2,r24
+ 181:D:/voipsoft/lcd.c **** 	CurrentNum = TempNum;
+ 839               	.LM95:
+ 840 02fa 9091 0000 		lds r25,TempNum.1
+ 841 02fe 9093 0000 		sts CurrentNum.3,r25
+ 182:D:/voipsoft/lcd.c **** 	if(CurrentNum == LastNum)
+ 843               	.LM96:
+ 844 0302 9817      		cp r25,r24
+ 845 0304 19F4      		brne .L201
+ 183:D:/voipsoft/lcd.c **** 		return 16;
+ 847               	.LM97:
+ 848 0306 80E1      		ldi r24,lo8(16)
+ 849 0308 90E0      		ldi r25,hi8(16)
+ 850 030a 0895      		ret
+ 851               	.L201:
+ 184:D:/voipsoft/lcd.c **** 	else
+ 185:D:/voipsoft/lcd.c **** 		return CurrentNum;
+ 853               	.LM98:
+ 854 030c 892F      		mov r24,r25
+ 855 030e 9927      		clr r25
+ 186:D:/voipsoft/lcd.c **** 
+ 187:D:/voipsoft/lcd.c **** }
+ 857               	.LM99:
+ 858 0310 0895      		ret
+ 859               	/* epilogue: frame size=0 */
+ 860 0312 0895      		ret
+ 861               	/* epilogue end (size=1) */
+ 862               	/* function Keyboard size 181 (180) */
+ 870               	.global	UI_Init
+ 872               	UI_Init:
+ 874               	.Ltext2:
+   1:D:/voipsoft/ui.c **** #include "type.h"
+   2:D:/voipsoft/ui.c **** #include "sys.h"
+   3:D:/voipsoft/ui.c **** 
+   4:D:/voipsoft/ui.c **** #define MODE_ZERO		0
+   5:D:/voipsoft/ui.c **** #define MODE_COMMAND	1
+   6:D:/voipsoft/ui.c **** #include "type.h"
+   7:D:/voipsoft/ui.c **** #include "sys.h"
+   8:D:/voipsoft/ui.c **** 
+   9:D:/voipsoft/ui.c **** #define MODE_DATA		2
+  10:D:/voipsoft/ui.c **** 
+  11:D:/voipsoft/ui.c **** #define COMMAND_LEN		4
+  12:D:/voipsoft/ui.c **** #define MAX_DATA_LEN	24
+  13:D:/voipsoft/ui.c **** 
+  14:D:/voipsoft/ui.c **** DCHAR _iMode, _iCommandPos, _iDataPos;
+  15:D:/voipsoft/ui.c **** DCHAR _pCommand[COMMAND_LEN];
+  16:D:/voipsoft/ui.c **** DCHAR _pData[MAX_DATA_LEN + 1];
+  17:D:/voipsoft/ui.c **** 
+  18:D:/voipsoft/ui.c **** unsigned char _pKey[] = "KEY ";
+  19:D:/voipsoft/ui.c **** 
+  20:D:/voipsoft/ui.c **** void UI_Init(void)
+  21:D:/voipsoft/ui.c **** {
+ 876               	.LM100:
+ 877               	/* prologue: frame size=0 */
+ 878               	/* prologue end (size=0) */
+  22:D:/voipsoft/ui.c **** 	_iMode = MODE_ZERO;
+ 880               	.LM101:
+ 881 0314 1092 0000 		sts _iMode,__zero_reg__
+  23:D:/voipsoft/ui.c **** 	_iCommandPos = _iDataPos = 0;
+ 883               	.LM102:
+ 884 0318 1092 0000 		sts _iDataPos,__zero_reg__
+ 885 031c 1092 0000 		sts _iCommandPos,__zero_reg__
+ 886               	/* epilogue: frame size=0 */
+ 887 0320 0895      		ret
+ 888               	/* epilogue end (size=1) */
+ 889               	/* function UI_Init size 7 (6) */
+ 893               	.global	_isprint
+ 895               	_isprint:
+  24:D:/voipsoft/ui.c **** }
+  25:D:/voipsoft/ui.c **** 
+  26:D:/voipsoft/ui.c **** BOOLEAN _isprint(UCHAR iVal) 
+  27:D:/voipsoft/ui.c **** {
+ 897               	.LM103:
+ 898               	/* prologue: frame size=0 */
+ 899               	/* prologue end (size=0) */
+  28:D:/voipsoft/ui.c **** 	return (iVal >= 0x20 && iVal < 0x7f) ? TRUE : FALSE;
+ 901               	.LM104:
+ 902 0322 20E0      		ldi r18,lo8(0)
+ 903 0324 30E0      		ldi r19,hi8(0)
+ 904 0326 8052      		subi r24,lo8(-(-32))
+ 905 0328 8F35      		cpi r24,lo8(95)
+ 906 032a 10F4      		brsh .L208
+ 908               	.LM105:
+ 909 032c 21E0      		ldi r18,lo8(1)
+ 910 032e 30E0      		ldi r19,hi8(1)
+ 911               	.L208:
+  29:D:/voipsoft/ui.c **** }
+ 913               	.LM106:
+ 914 0330 C901      		movw r24,r18
+ 915               	/* epilogue: frame size=0 */
+ 916 0332 0895      		ret
+ 917               	/* epilogue end (size=1) */
+ 918               	/* function _isprint size 9 (8) */
+ 922               	.global	UART_SendChar
+ 924               	UART_SendChar:
+ 926               	.Ltext3:
+   1:D:/voipsoft/uart.c **** #include "type.h"
+   2:D:/voipsoft/uart.c **** #include "sys.h"
+   3:D:/voipsoft/uart.c **** 
+   4:D:/voipsoft/uart.c **** #define UART_BUF_LEN	48
+   5:D:/voipsoft/uart.c **** 
+   6:D:/voipsoft/uart.c **** volatile DCHAR _iInputHead, _iInputTail;
+   7:D:/voipsoft/uart.c **** volatile ICHAR _pInputBuf[UART_BUF_LEN];
+   8:D:/voipsoft/uart.c **** 
+   9:D:/voipsoft/uart.c **** 
+  10:D:/voipsoft/uart.c **** void UART_SendChar(UCHAR data)
+  11:D:/voipsoft/uart.c **** {
+ 928               	.LM107:
+ 929               	/* prologue: frame size=0 */
+ 930               	/* prologue end (size=0) */
+  12:D:/voipsoft/uart.c **** 	UDR0	=	data;
+ 932               	.LM108:
+ 933 0334 8CB9      		out 44-0x20,r24
+ 934               	.L210:
+  13:D:/voipsoft/uart.c **** 	while(!(UCSR0A & (1<<5)));
+ 936               	.LM109:
+ 937 0336 5D9B      		sbis 43-0x20,5
+ 938 0338 FECF      		rjmp .L210
+ 939               	/* epilogue: frame size=0 */
+ 940 033a 0895      		ret
+ 941               	/* epilogue end (size=1) */
+ 942               	/* function UART_SendChar size 4 (3) */
+ 945               	.global	_Padding
+ 947               	_Padding:
+ 949               	.Ltext4:
+  30:D:/voipsoft/ui.c **** 
+  31:D:/voipsoft/ui.c **** void _Padding(void)
+  32:D:/voipsoft/ui.c **** {
+ 951               	.LM110:
+ 952               	/* prologue: frame size=0 */
+ 953 033c CF93      		push r28
+ 954               	/* prologue end (size=1) */
+ 955 033e C3E0      		ldi r28,lo8(3)
+ 956               	.L217:
+  33:D:/voipsoft/ui.c **** 	DCHAR i;
+  34:D:/voipsoft/ui.c **** 
+  35:D:/voipsoft/ui.c **** 	for (i = 0; i < 4; i ++)
+  36:D:/voipsoft/ui.c **** 	{
+  37:D:/voipsoft/ui.c **** 		UART_SendChar(0);
+ 958               	.LM111:
+ 959 0340 80E0      		ldi r24,lo8(0)
+ 960 0342 0E94 0000 		call UART_SendChar
+ 962               	.LM112:
+ 963 0346 C150      		subi r28,lo8(-(-1))
+ 964 0348 C7FF      		sbrs r28,7
+ 965 034a FACF      		rjmp .L217
+ 966               	/* epilogue: frame size=0 */
+ 967 034c CF91      		pop r28
+ 968 034e 0895      		ret
+ 969               	/* epilogue end (size=2) */
+ 970               	/* function _Padding size 10 (7) */
+ 975               	.global	_SendCommand
+ 977               	_SendCommand:
+  38:D:/voipsoft/ui.c **** 	}
+  39:D:/voipsoft/ui.c **** }
+  40:D:/voipsoft/ui.c **** 
+  41:D:/voipsoft/ui.c **** void _SendCommand(unsigned char* pCommand)
+  42:D:/voipsoft/ui.c **** {
+ 979               	.LM113:
+ 980               	/* prologue: frame size=0 */
+ 981 0350 1F93      		push r17
+ 982 0352 CF93      		push r28
+ 983 0354 DF93      		push r29
+ 984               	/* prologue end (size=3) */
+ 985 0356 EC01      		movw r28,r24
+ 986 0358 13E0      		ldi r17,lo8(3)
+ 987               	.L224:
+  43:D:/voipsoft/ui.c **** 	DCHAR i;
+  44:D:/voipsoft/ui.c **** 
+  45:D:/voipsoft/ui.c **** 	for (i = 0; i < COMMAND_LEN; i ++)
+  46:D:/voipsoft/ui.c **** 	{
+  47:D:/voipsoft/ui.c **** 		UART_SendChar(pCommand[i]);
+ 989               	.LM114:
+ 990 035a 8991      		ld r24,Y+
+ 991 035c 0E94 0000 		call UART_SendChar
+ 993               	.LM115:
+ 994 0360 1150      		subi r17,lo8(-(-1))
+ 995 0362 17FF      		sbrs r17,7
+ 996 0364 FACF      		rjmp .L224
+ 997               	/* epilogue: frame size=0 */
+ 998 0366 DF91      		pop r29
+ 999 0368 CF91      		pop r28
+ 1000 036a 1F91      		pop r17
+ 1001 036c 0895      		ret
+ 1002               	/* epilogue end (size=4) */
+ 1003               	/* function _SendCommand size 15 (8) */
+ 1008               	.global	_SendData
+ 1010               	_SendData:
+  48:D:/voipsoft/ui.c **** 	}
+  49:D:/voipsoft/ui.c **** }
+  50:D:/voipsoft/ui.c **** 
+  51:D:/voipsoft/ui.c **** void _SendData(PDCHAR pData)
+  52:D:/voipsoft/ui.c **** {
+ 1012               	.LM116:
+ 1013               	/* prologue: frame size=0 */
+ 1014 036e 1F93      		push r17
+ 1015 0370 CF93      		push r28
+ 1016 0372 DF93      		push r29
+ 1017               	/* prologue end (size=3) */
+  53:D:/voipsoft/ui.c **** 	DCHAR i;
+  54:D:/voipsoft/ui.c **** 
+  55:D:/voipsoft/ui.c **** 	for (i = 0; i < MAX_DATA_LEN; i ++)
+ 1019               	.LM117:
+ 1020 0374 10E0      		ldi r17,lo8(0)
+ 1021 0376 EC01      		movw r28,r24
+ 1022               	.L232:
+  56:D:/voipsoft/ui.c **** 	{
+  57:D:/voipsoft/ui.c **** 		UART_SendChar(pData[i]);
+ 1024               	.LM118:
+ 1025 0378 8881      		ld r24,Y
+ 1026 037a 0E94 0000 		call UART_SendChar
+  58:D:/voipsoft/ui.c **** 		if (!pData[i])
+ 1028               	.LM119:
+ 1029 037e 8881      		ld r24,Y
+ 1030 0380 8823      		tst r24
+ 1031 0382 21F0      		breq .L229
+ 1033               	.LM120:
+ 1034 0384 1F5F      		subi r17,lo8(-(1))
+ 1035 0386 2196      		adiw r28,1
+ 1036 0388 1831      		cpi r17,lo8(24)
+ 1037 038a B0F3      		brlo .L232
+ 1038               	.L229:
+ 1039               	/* epilogue: frame size=0 */
+ 1040 038c DF91      		pop r29
+ 1041 038e CF91      		pop r28
+ 1042 0390 1F91      		pop r17
+ 1043 0392 0895      		ret
+ 1044               	/* epilogue end (size=4) */
+ 1045               	/* function _SendData size 19 (12) */
+ 1052               	.global	memcmp_c2d
+ 1054               	memcmp_c2d:
+ 1056               	.Ltext5:
+   1:D:/voipsoft/string.c **** 
+   2:D:/voipsoft/string.c **** 
+   3:D:/voipsoft/string.c **** #include "type.h"
+   4:D:/voipsoft/string.c **** 
+   5:D:/voipsoft/string.c **** void memcpy_c2d(PCCHAR pDst, PCCHAR pSrc, unsigned char iCount)
+   6:D:/voipsoft/string.c **** {
+   7:D:/voipsoft/string.c **** 	while (iCount --)
+   8:D:/voipsoft/string.c **** 	{
+   9:D:/voipsoft/string.c **** 		* pDst ++ = * pSrc ++;
+  10:D:/voipsoft/string.c **** 	}
+  11:D:/voipsoft/string.c **** }
+  12:D:/voipsoft/string.c **** 
+  13:D:/voipsoft/string.c **** unsigned char memcmp_c2d(PCCHAR pDst, PCCHAR pSrc, unsigned char iCount)
+  14:D:/voipsoft/string.c **** {
+ 1058               	.LM121:
+ 1059               	/* prologue: frame size=0 */
+ 1060               	/* prologue end (size=0) */
+ 1061 0394 FC01      		movw r30,r24
+ 1062 0396 DB01      		movw r26,r22
+ 1063 0398 06C0      		rjmp .L240
+ 1064               	.L239:
+  15:D:/voipsoft/string.c **** 	while (-- iCount && * pDst == * pSrc) 
+  16:D:/voipsoft/string.c **** 	{
+  17:D:/voipsoft/string.c **** 		pDst ++;
+  18:D:/voipsoft/string.c **** 		pSrc ++;
+ 1066               	.LM122:
+ 1067 039a 9081      		ld r25,Z
+ 1068 039c 8C91      		ld r24,X
+ 1069 039e 9817      		cp r25,r24
+ 1070 03a0 21F4      		brne .L236
+ 1072               	.LM123:
+ 1073 03a2 3196      		adiw r30,1
+ 1075               	.LM124:
+ 1076 03a4 1196      		adiw r26,1
+ 1077               	.L240:
+ 1078 03a6 4150      		subi r20,lo8(-(-1))
+ 1079 03a8 C1F7      		brne .L239
+ 1080               	.L236:
+  19:D:/voipsoft/string.c **** 	}
+  20:D:/voipsoft/string.c **** 
+  21:D:/voipsoft/string.c **** 	return(* pDst - * pSrc);
+ 1082               	.LM125:
+ 1083 03aa 8081      		ld r24,Z
+ 1084 03ac 9C91      		ld r25,X
+ 1085 03ae 891B      		sub r24,r25
+  22:D:/voipsoft/string.c **** }
+ 1087               	.LM126:
+ 1088 03b0 9927      		clr r25
+ 1089               	/* epilogue: frame size=0 */
+ 1090 03b2 0895      		ret
+ 1091               	/* epilogue end (size=1) */
+ 1092               	/* function memcmp_c2d size 17 (16) */
+ 1096               	.global	_CompareCommand
+ 1098               	_CompareCommand:
+ 1100               	.Ltext6:
+  59:D:/voipsoft/ui.c **** 		{
+  60:D:/voipsoft/ui.c **** 			break;
+  61:D:/voipsoft/ui.c **** 		}
+  62:D:/voipsoft/ui.c **** 	}
+  63:D:/voipsoft/ui.c **** }
+  64:D:/voipsoft/ui.c **** 
+  65:D:/voipsoft/ui.c **** BOOLEAN _CompareCommand(PCCHAR p)
+  66:D:/voipsoft/ui.c **** {
+ 1102               	.LM127:
+ 1103               	/* prologue: frame size=0 */
+ 1104 03b4 CF93      		push r28
+ 1105 03b6 DF93      		push r29
+ 1106               	/* prologue end (size=2) */
+  67:D:/voipsoft/ui.c **** 	return memcmp_c2d(_pCommand, p, COMMAND_LEN) ? FALSE : TRUE;
+ 1108               	.LM128:
+ 1109 03b8 C0E0      		ldi r28,lo8(0)
+ 1110 03ba D0E0      		ldi r29,hi8(0)
+ 1111 03bc 44E0      		ldi r20,lo8(4)
+ 1112 03be BC01      		movw r22,r24
+ 1113 03c0 80E0      		ldi r24,lo8(_pCommand)
+ 1114 03c2 90E0      		ldi r25,hi8(_pCommand)
+ 1115 03c4 0E94 0000 		call memcmp_c2d
+ 1116 03c8 8823      		tst r24
+ 1117 03ca 11F4      		brne .L242
+ 1119               	.LM129:
+ 1120 03cc C1E0      		ldi r28,lo8(1)
+ 1121 03ce D0E0      		ldi r29,hi8(1)
+ 1122               	.L242:
+  68:D:/voipsoft/ui.c **** }
+ 1124               	.LM130:
+ 1125 03d0 CE01      		movw r24,r28
+ 1126               	/* epilogue: frame size=0 */
+ 1127 03d2 DF91      		pop r29
+ 1128 03d4 CF91      		pop r28
+ 1129 03d6 0895      		ret
+ 1130               	/* epilogue end (size=3) */
+ 1131               	/* function _CompareCommand size 18 (13) */
+ 1135               	.global	UI_HandleSerialChar
+ 1137               	UI_HandleSerialChar:
+  69:D:/voipsoft/ui.c **** 
+  70:D:/voipsoft/ui.c **** void UI_HandleSerialChar(UCHAR iVal)
+  71:D:/voipsoft/ui.c **** {
+ 1139               	.LM131:
+ 1140               	/* prologue: frame size=0 */
+ 1141 03d8 1F93      		push r17
+ 1142 03da CF93      		push r28
+ 1143               	/* prologue end (size=2) */
+ 1144 03dc 182F      		mov r17,r24
+  72:D:/voipsoft/ui.c **** 	// Analyze it!
+  73:D:/voipsoft/ui.c **** 	if (_iMode == MODE_COMMAND)
+ 1146               	.LM132:
+ 1147 03de 9091 0000 		lds r25,_iMode
+ 1148 03e2 9130      		cpi r25,lo8(1)
+ 1149 03e4 F1F4      		brne .L244
+  74:D:/voipsoft/ui.c **** 	{
+  75:D:/voipsoft/ui.c **** 		if (_iCommandPos < COMMAND_LEN)
+ 1151               	.LM133:
+ 1152 03e6 C091 0000 		lds r28,_iCommandPos
+ 1153 03ea C430      		cpi r28,lo8(4)
+ 1154 03ec 80F4      		brsh .L245
+  76:D:/voipsoft/ui.c **** 		{
+  77:D:/voipsoft/ui.c **** 			if (_isprint(iVal))
+ 1156               	.LM134:
+ 1157 03ee 0E94 0000 		call _isprint
+ 1158 03f2 892B      		or r24,r25
+ 1159 03f4 49F0      		breq .L246
+  78:D:/voipsoft/ui.c **** 			{
+  79:D:/voipsoft/ui.c **** 				_pCommand[_iCommandPos] = iVal;
+ 1161               	.LM135:
+ 1162 03f6 EC2F      		mov r30,r28
+ 1163 03f8 FF27      		clr r31
+ 1164 03fa E050      		subi r30,lo8(-(_pCommand))
+ 1165 03fc F040      		sbci r31,hi8(-(_pCommand))
+ 1166 03fe 1083      		st Z,r17
+  80:D:/voipsoft/ui.c **** 				_iCommandPos ++;
+ 1168               	.LM136:
+ 1169 0400 CF5F      		subi r28,lo8(-(1))
+ 1170 0402 C093 0000 		sts _iCommandPos,r28
+ 1171 0406 31C0      		rjmp .L243
+ 1172               	.L246:
+  81:D:/voipsoft/ui.c **** 			}
+  82:D:/voipsoft/ui.c **** 			else
+  83:D:/voipsoft/ui.c **** 			{
+  84:D:/voipsoft/ui.c **** 				_iMode = MODE_ZERO;
+ 1174               	.LM137:
+ 1175 0408 1092 0000 		sts _iMode,__zero_reg__
+ 1176 040c 2EC0      		rjmp .L243
+ 1177               	.L245:
+  85:D:/voipsoft/ui.c **** 			}
+  86:D:/voipsoft/ui.c **** 		}
+  87:D:/voipsoft/ui.c **** 		else
+  88:D:/voipsoft/ui.c **** 		{
+  89:D:/voipsoft/ui.c **** 			if (iVal)
+ 1179               	.LM138:
+ 1180 040e 8823      		tst r24
+ 1181 0410 F1F0      		breq .L258
+  90:D:/voipsoft/ui.c **** 			{
+  91:D:/voipsoft/ui.c **** 				_iMode = MODE_DATA;
+ 1183               	.LM139:
+ 1184 0412 82E0      		ldi r24,lo8(2)
+ 1185 0414 8093 0000 		sts _iMode,r24
+  92:D:/voipsoft/ui.c **** 				_pData[0] = iVal;
+ 1187               	.LM140:
+ 1188 0418 1093 0000 		sts _pData,r17
+  93:D:/voipsoft/ui.c **** 				_iDataPos = 1;
+ 1190               	.LM141:
+ 1191 041c 9093 0000 		sts _iDataPos,r25
+ 1192 0420 24C0      		rjmp .L243
+ 1193               	.L244:
+  94:D:/voipsoft/ui.c **** 			}
+  95:D:/voipsoft/ui.c **** 			else
+  96:D:/voipsoft/ui.c **** 			{
+  97:D:/voipsoft/ui.c **** 				_iMode = MODE_ZERO;
+  98:D:/voipsoft/ui.c **** 			}
+  99:D:/voipsoft/ui.c **** 		}
+ 100:D:/voipsoft/ui.c **** 	}
+ 101:D:/voipsoft/ui.c **** 	else if (_iMode == MODE_DATA)
+ 1195               	.LM142:
+ 1196 0422 9230      		cpi r25,lo8(2)
+ 1197 0424 B9F4      		brne .L252
+ 1198 0426 8091 0000 		lds r24,_iDataPos
+ 102:D:/voipsoft/ui.c **** 	{
+ 103:D:/voipsoft/ui.c **** 		if (iVal)
+ 1200               	.LM143:
+ 1201 042a 1123      		tst r17
+ 1202 042c 59F0      		breq .L253
+ 104:D:/voipsoft/ui.c **** 		{
+ 105:D:/voipsoft/ui.c **** 			if (_iDataPos < MAX_DATA_LEN)
+ 1204               	.LM144:
+ 1205 042e 8831      		cpi r24,lo8(24)
+ 1206 0430 E0F4      		brsh .L243
+ 106:D:/voipsoft/ui.c **** 			{
+ 107:D:/voipsoft/ui.c **** 				_pData[_iDataPos] = iVal;
+ 1208               	.LM145:
+ 1209 0432 E82F      		mov r30,r24
+ 1210 0434 FF27      		clr r31
+ 1211 0436 E050      		subi r30,lo8(-(_pData))
+ 1212 0438 F040      		sbci r31,hi8(-(_pData))
+ 1213 043a 1083      		st Z,r17
+ 108:D:/voipsoft/ui.c **** 				_iDataPos ++;
+ 1215               	.LM146:
+ 1216 043c 8F5F      		subi r24,lo8(-(1))
+ 1217 043e 8093 0000 		sts _iDataPos,r24
+ 1218 0442 13C0      		rjmp .L243
+ 1219               	.L253:
+ 109:D:/voipsoft/ui.c **** 			}
+ 110:D:/voipsoft/ui.c **** 		}
+ 111:D:/voipsoft/ui.c **** 		else
+ 112:D:/voipsoft/ui.c **** 		{
+ 113:D:/voipsoft/ui.c **** 			_pData[_iDataPos] = 0;
+ 1221               	.LM147:
+ 1222 0444 E82F      		mov r30,r24
+ 1223 0446 FF27      		clr r31
+ 1224 0448 E050      		subi r30,lo8(-(_pData))
+ 1225 044a F040      		sbci r31,hi8(-(_pData))
+ 1226 044c 1083      		st Z,r17
+ 1227               	.L258:
+ 114:D:/voipsoft/ui.c **** 			_iMode = MODE_ZERO;
+ 1229               	.LM148:
+ 1230 044e 1093 0000 		sts _iMode,r17
+ 1231 0452 0BC0      		rjmp .L243
+ 1232               	.L252:
+ 115:D:/voipsoft/ui.c **** 		}
+ 116:D:/voipsoft/ui.c **** 	}
+ 117:D:/voipsoft/ui.c **** 	else	// MODE_ZERO
+ 118:D:/voipsoft/ui.c **** 	{
+ 119:D:/voipsoft/ui.c **** 		if (_isprint(iVal))
+ 1234               	.LM149:
+ 1235 0454 0E94 0000 		call _isprint
+ 1236 0458 892B      		or r24,r25
+ 1237 045a 39F0      		breq .L243
+ 120:D:/voipsoft/ui.c **** 		{
+ 121:D:/voipsoft/ui.c **** 			_iMode = MODE_COMMAND;
+ 1239               	.LM150:
+ 1240 045c 81E0      		ldi r24,lo8(1)
+ 1241 045e 8093 0000 		sts _iMode,r24
+ 122:D:/voipsoft/ui.c **** 			_pCommand[0] = iVal;
+ 1243               	.LM151:
+ 1244 0462 1093 0000 		sts _pCommand,r17
+ 123:D:/voipsoft/ui.c **** 			_iCommandPos = 1;
+ 1246               	.LM152:
+ 1247 0466 8093 0000 		sts _iCommandPos,r24
+ 1248               	.L243:
+ 1249               	/* epilogue: frame size=0 */
+ 1250 046a CF91      		pop r28
+ 1251 046c 1F91      		pop r17
+ 1252 046e 0895      		ret
+ 1253               	/* epilogue end (size=3) */
+ 1254               	/* function UI_HandleSerialChar size 76 (71) */
+ 1258               	.global	UI_HandleKey
+ 1260               	UI_HandleKey:
+ 124:D:/voipsoft/ui.c **** 		}
+ 125:D:/voipsoft/ui.c **** 	}
+ 126:D:/voipsoft/ui.c **** }
+ 127:D:/voipsoft/ui.c **** 
+ 128:D:/voipsoft/ui.c **** void UI_HandleKey(UCHAR iKey)
+ 129:D:/voipsoft/ui.c **** {
+ 1262               	.LM153:
+ 1263               	/* prologue: frame size=2 */
+ 1264 0470 0F93      		push r16
+ 1265 0472 1F93      		push r17
+ 1266 0474 CF93      		push r28
+ 1267 0476 DF93      		push r29
+ 1268 0478 CDB7      		in r28,__SP_L__
+ 1269 047a DEB7      		in r29,__SP_H__
+ 1270 047c 2297      		sbiw r28,2
+ 1271 047e 0FB6      		in __tmp_reg__,__SREG__
+ 1272 0480 F894      		cli
+ 1273 0482 DEBF      		out __SP_H__,r29
+ 1274 0484 0FBE      		out __SREG__,__tmp_reg__
+ 1275 0486 CDBF      		out __SP_L__,r28
+ 1276               	/* prologue end (size=12) */
+ 130:D:/voipsoft/ui.c **** 	DCHAR pBuf[2];
+ 131:D:/voipsoft/ui.c **** 
+ 132:D:/voipsoft/ui.c **** 	if (!iKey)	return;
+ 1278               	.LM154:
+ 1279 0488 8823      		tst r24
+ 1280 048a 79F0      		breq .L259
+ 133:D:/voipsoft/ui.c **** 
+ 134:D:/voipsoft/ui.c **** 	pBuf[0] = iKey;
+ 1282               	.LM155:
+ 1283 048c 8983      		std Y+1,r24
+ 135:D:/voipsoft/ui.c **** 	pBuf[1] = 0;
+ 1285               	.LM156:
+ 1286 048e 8E01      		movw r16,r28
+ 1287 0490 0F5F      		subi r16,lo8(-(1))
+ 1288 0492 1F4F      		sbci r17,hi8(-(1))
+ 1289 0494 F801      		movw r30,r16
+ 1290 0496 1182      		std Z+1,__zero_reg__
+ 136:D:/voipsoft/ui.c **** 
+ 137:D:/voipsoft/ui.c **** 	_SendCommand(_pKey);
+ 1292               	.LM157:
+ 1293 0498 80E0      		ldi r24,lo8(_pKey)
+ 1294 049a 90E0      		ldi r25,hi8(_pKey)
+ 1295 049c 0E94 0000 		call _SendCommand
+ 138:D:/voipsoft/ui.c **** 	_SendData(pBuf);
+ 1297               	.LM158:
+ 1298 04a0 C801      		movw r24,r16
+ 1299 04a2 0E94 0000 		call _SendData
+ 139:D:/voipsoft/ui.c **** 	_Padding();
+ 1301               	.LM159:
+ 1302 04a6 0E94 0000 		call _Padding
+ 1303               	.L259:
+ 1304               	/* epilogue: frame size=2 */
+ 1305 04aa 2296      		adiw r28,2
+ 1306 04ac 0FB6      		in __tmp_reg__,__SREG__
+ 1307 04ae F894      		cli
+ 1308 04b0 DEBF      		out __SP_H__,r29
+ 1309 04b2 0FBE      		out __SREG__,__tmp_reg__
+ 1310 04b4 CDBF      		out __SP_L__,r28
+ 1311 04b6 DF91      		pop r29
+ 1312 04b8 CF91      		pop r28
+ 1313 04ba 1F91      		pop r17
+ 1314 04bc 0F91      		pop r16
+ 1315 04be 0895      		ret
+ 1316               	/* epilogue end (size=11) */
+ 1317               	/* function UI_HandleKey size 40 (17) */
+ 1321               	.global	UART_Init
+ 1323               	UART_Init:
+ 1325               	.Ltext7:
+  14:D:/voipsoft/uart.c **** }
+  15:D:/voipsoft/uart.c **** 
+  16:D:/voipsoft/uart.c **** void UART_Init(void)
+  17:D:/voipsoft/uart.c **** {
+ 1327               	.LM160:
+ 1328               	/* prologue: frame size=0 */
+ 1329               	/* prologue end (size=0) */
+  18:D:/voipsoft/uart.c **** 
+  19:D:/voipsoft/uart.c **** 	 UBRR0H=0;
+ 1331               	.LM161:
+ 1332 04c0 1092 9000 		sts 144,__zero_reg__
+  20:D:/voipsoft/uart.c **** 	 UBRR0L=2;
+ 1334               	.LM162:
+ 1335 04c4 82E0      		ldi r24,lo8(2)
+ 1336 04c6 89B9      		out 41-0x20,r24
+  21:D:/voipsoft/uart.c **** 	 UCSR0B=(1<<TXEN);	
+ 1338               	.LM163:
+ 1339 04c8 88E0      		ldi r24,lo8(8)
+ 1340 04ca 8AB9      		out 42-0x20,r24
+  22:D:/voipsoft/uart.c **** 	 UCSR0C=DATA_8;
+ 1342               	.LM164:
+ 1343 04cc 86E0      		ldi r24,lo8(6)
+ 1344 04ce 8093 9500 		sts 149,r24
+ 1345               	/* epilogue: frame size=0 */
+ 1346 04d2 0895      		ret
+ 1347               	/* epilogue end (size=1) */
+ 1348               	/* function UART_Init size 10 (9) */
+ 1351               	.global	UART_Run
+ 1353               	UART_Run:
+  23:D:/voipsoft/uart.c **** }
+  24:D:/voipsoft/uart.c **** 
+  25:D:/voipsoft/uart.c **** void UART_Run(void)
+  26:D:/voipsoft/uart.c **** {
+ 1355               	.LM165:
+ 1356               	/* prologue: frame size=0 */
+ 1357 04d4 CF93      		push r28
+ 1358               	/* prologue end (size=1) */
+  27:D:/voipsoft/uart.c **** 	DCHAR iTail;
+  28:D:/voipsoft/uart.c **** 
+  29:D:/voipsoft/uart.c **** 	iTail = _iInputTail + 1;
+ 1360               	.LM166:
+ 1361 04d6 C091 0000 		lds r28,_iInputTail
+ 1362 04da CF5F      		subi r28,lo8(-(1))
+  30:D:/voipsoft/uart.c **** 	if (iTail == UART_BUF_LEN)
+ 1364               	.LM167:
+ 1365 04dc C033      		cpi r28,lo8(48)
+ 1366 04de 09F4      		brne .L263
+  31:D:/voipsoft/uart.c **** 	{
+  32:D:/voipsoft/uart.c **** 		iTail = 0;
+ 1368               	.LM168:
+ 1369 04e0 C0E0      		ldi r28,lo8(0)
+ 1370               	.L263:
+  33:D:/voipsoft/uart.c **** 	}
+  34:D:/voipsoft/uart.c **** 
+  35:D:/voipsoft/uart.c **** 	while (iTail != _iInputHead)
+  36:D:/voipsoft/uart.c **** 	{
+  37:D:/voipsoft/uart.c **** 		UI_HandleSerialChar(_pInputBuf[iTail]);
+  38:D:/voipsoft/uart.c **** 
+  39:D:/voipsoft/uart.c **** 		_iInputTail = iTail;
+  40:D:/voipsoft/uart.c **** 		iTail ++;
+  41:D:/voipsoft/uart.c **** 		if (iTail == UART_BUF_LEN)
+  42:D:/voipsoft/uart.c **** 		{
+  43:D:/voipsoft/uart.c **** 			iTail = 0;
+ 1372               	.LM169:
+ 1373 04e2 8091 0000 		lds r24,_iInputHead
+ 1374 04e6 C817      		cp r28,r24
+ 1375 04e8 89F0      		breq .L269
+ 1376               	.L267:
+ 1378               	.LM170:
+ 1379 04ea EC2F      		mov r30,r28
+ 1380 04ec FF27      		clr r31
+ 1381 04ee E050      		subi r30,lo8(-(_pInputBuf))
+ 1382 04f0 F040      		sbci r31,hi8(-(_pInputBuf))
+ 1383 04f2 8081      		ld r24,Z
+ 1384 04f4 0E94 0000 		call UI_HandleSerialChar
+ 1386               	.LM171:
+ 1387 04f8 C093 0000 		sts _iInputTail,r28
+ 1389               	.LM172:
+ 1390 04fc CF5F      		subi r28,lo8(-(1))
+ 1392               	.LM173:
+ 1393 04fe C033      		cpi r28,lo8(48)
+ 1394 0500 09F4      		brne .L264
+ 1396               	.LM174:
+ 1397 0502 C0E0      		ldi r28,lo8(0)
+ 1398               	.L264:
+ 1399 0504 8091 0000 		lds r24,_iInputHead
+ 1400 0508 C817      		cp r28,r24
+ 1401 050a 79F7      		brne .L267
+ 1402               	.L269:
+ 1403               	/* epilogue: frame size=0 */
+ 1404 050c CF91      		pop r28
+ 1405 050e 0895      		ret
+ 1406               	/* epilogue end (size=2) */
+ 1407               	/* function UART_Run size 30 (27) */
+ 1414               	.global	memcpy_c2d
+ 1416               	memcpy_c2d:
+ 1418               	.Ltext8:
+ 1420               	.LM175:
+ 1421               	/* prologue: frame size=0 */
+ 1422               	/* prologue end (size=0) */
+ 1423 0510 DC01      		movw r26,r24
+ 1424 0512 FB01      		movw r30,r22
+ 1425               	.L276:
+ 1427               	.LM176:
+ 1428 0514 4150      		subi r20,lo8(-(-1))
+ 1429 0516 4F3F      		cpi r20,lo8(-1)
+ 1430 0518 19F0      		breq .L275
+ 1431 051a 8191      		ld r24,Z+
+ 1432 051c 8D93      		st X+,r24
+ 1433 051e FACF      		rjmp .L276
+ 1434               	.L275:
+ 1435 0520 0895      		ret
+ 1436               	/* epilogue: frame size=0 */
+ 1437               	/* epilogue: noreturn */
+ 1438               	/* epilogue end (size=0) */
+ 1439               	/* function memcpy_c2d size 9 (9) */
+ 1445               	.global	memset_d
+ 1447               	memset_d:
+  23:D:/voipsoft/string.c **** 
+  24:D:/voipsoft/string.c **** void memset_d(PCCHAR pDst, unsigned char iVal, unsigned char iCount)
+  25:D:/voipsoft/string.c **** {
+ 1449               	.LM177:
+ 1450               	/* prologue: frame size=0 */
+ 1451               	/* prologue end (size=0) */
+ 1452 0522 FC01      		movw r30,r24
+ 1453               	.L283:
+  26:D:/voipsoft/string.c **** 	while (-- iCount) 
+  27:D:/voipsoft/string.c **** 	{
+  28:D:/voipsoft/string.c **** 		* pDst ++ = iVal;
+ 1455               	.LM178:
+ 1456 0524 4150      		subi r20,lo8(-(-1))
+ 1457 0526 11F0      		breq .L282
+ 1458 0528 6193      		st Z+,r22
+ 1459 052a FCCF      		rjmp .L283
+ 1460               	.L282:
+ 1461 052c 0895      		ret
+ 1462               	/* epilogue: frame size=0 */
+ 1463               	/* epilogue: noreturn */
+ 1464               	/* epilogue end (size=0) */
+ 1465               	/* function memset_d size 7 (7) */
+ 1468               	.global	Lcd_reinit
+ 1470               	Lcd_reinit:
+ 1472               	.Ltext9:
+   1:D:/voipsoft/main.c **** #include "sys.h"
+   2:D:/voipsoft/main.c **** #include <avr/io.h>
+   3:D:/voipsoft/main.c **** #include <inttypes.h>
+   4:D:/voipsoft/main.c **** #include <avr/interrupt.h>
+   5:D:/voipsoft/main.c **** #include <avr/signal.h>
+   6:D:/voipsoft/main.c **** #include "type.h"
+   7:D:/voipsoft/main.c **** #include "lcd.c"
+   8:D:/voipsoft/main.c **** #include "ui.c"
+   9:D:/voipsoft/main.c **** #include "uart.c"
+  10:D:/voipsoft/main.c **** #include "string.c"
+  11:D:/voipsoft/main.c **** 
+  12:D:/voipsoft/main.c **** void ControlInitialize(void);
+  13:D:/voipsoft/main.c **** void onekey(char *servernum);
+  14:D:/voipsoft/main.c **** char online='z';
+  15:D:/voipsoft/main.c **** char servernum1[]={'5','9','6','4','6','5','4','3','a'};
+  16:D:/voipsoft/main.c **** char servernum2[]={'5','9','6','4','1','1','2','0','a'};
+  17:D:/voipsoft/main.c **** uint8_t i;
+  18:D:/voipsoft/main.c **** 
+  19:D:/voipsoft/main.c **** SIGNAL(SIG_OVERFLOW0)
+  20:D:/voipsoft/main.c **** {
+  21:D:/voipsoft/main.c **** 	unsigned char number;
+  22:D:/voipsoft/main.c **** 	
+  23:D:/voipsoft/main.c **** 	uint8_t Keynum=16;
+  24:D:/voipsoft/main.c **** 	TCNT0=0xE2;
+  25:D:/voipsoft/main.c **** 	
+  26:D:/voipsoft/main.c **** 	Keynum=Keyboard(); //¶ÁÈ¡¼üÅÌÖµ
+  27:D:/voipsoft/main.c **** 	/*Èç¹û¼üÖµÔÚ0~9Ö®¼ä£¬¾ÍÔÚLCDµÚ1ÐÐµÚ1ÁÐÏÔÊ¾³öÀ´¡£
+  28:D:/voipsoft/main.c **** 		(Keynum+0x30)±íÊ¾È¡¼üÖµµÄASCIIÂë¡£*/
+  29:D:/voipsoft/main.c **** 	if (Keynum<10) write_data((Keynum+0x30)); 
+  30:D:/voipsoft/main.c **** 	else {
+  31:D:/voipsoft/main.c **** 			switch(Keynum)
+  32:D:/voipsoft/main.c **** 			{
+  33:D:/voipsoft/main.c **** 			case 10:write_data('*');break;
+  34:D:/voipsoft/main.c **** 			case 11:write_data('#');break;
+  35:D:/voipsoft/main.c **** 			case 12:Lcd_reinit();Write_String("OK");break;
+  36:D:/voipsoft/main.c **** 			case 13:Lcd_reinit();Write_String("Redial");break;
+  37:D:/voipsoft/main.c **** 			case 14:Lcd_reinit();Write_String("Offline");break;
+  38:D:/voipsoft/main.c **** 			case 15:Lcd_reinit();Write_String("Online!");break;
+  39:D:/voipsoft/main.c **** 			default: break;
+  40:D:/voipsoft/main.c **** 			}
+  41:D:/voipsoft/main.c **** 		}
+  42:D:/voipsoft/main.c **** 	if(Keynum!=16)
+  43:D:/voipsoft/main.c **** 	{
+  44:D:/voipsoft/main.c **** 		if(Keynum!=13)
+  45:D:/voipsoft/main.c **** 			UI_HandleKey(number=keydata[Keynum]);
+  46:D:/voipsoft/main.c **** 		else 
+  47:D:/voipsoft/main.c **** 		{
+  48:D:/voipsoft/main.c **** 			onekey(servernum1);
+  49:D:/voipsoft/main.c **** 		}
+  50:D:/voipsoft/main.c **** 	}
+  51:D:/voipsoft/main.c **** }
+  52:D:/voipsoft/main.c **** 
+  53:D:/voipsoft/main.c **** SIGNAL(SIG_INTERRUPT0)
+  54:D:/voipsoft/main.c **** {
+  55:D:/voipsoft/main.c **** 	onekey(servernum1);
+  56:D:/voipsoft/main.c **** }
+  57:D:/voipsoft/main.c **** 
+  58:D:/voipsoft/main.c **** void onekey(char *servernum)
+  59:D:/voipsoft/main.c **** {
+  60:D:/voipsoft/main.c **** 	UI_HandleKey(online);
+  61:D:/voipsoft/main.c **** 	delay_nms(10000);
+  62:D:/voipsoft/main.c **** 	for(i=0;i<9;i++)
+  63:D:/voipsoft/main.c **** 	{
+  64:D:/voipsoft/main.c **** 		write_data(servernum[i]);
+  65:D:/voipsoft/main.c **** 		UI_HandleKey(servernum[i]);
+  66:D:/voipsoft/main.c **** 	}
+  67:D:/voipsoft/main.c **** }
+  68:D:/voipsoft/main.c **** 
+  69:D:/voipsoft/main.c **** void Lcd_reinit()
+  70:D:/voipsoft/main.c **** {
+ 1474               	.LM179:
+ 1475               	/* prologue: frame size=0 */
+ 1476               	/* prologue end (size=0) */
+  71:D:/voipsoft/main.c **** 	clear_screen();
+ 1478               	.LM180:
+ 1479 052e 0E94 0000 		call clear_screen
+  72:D:/voipsoft/main.c **** 	Write_Position(1,1);
+ 1481               	.LM181:
+ 1482 0532 61E0      		ldi r22,lo8(1)
+ 1483 0534 862F      		mov r24,r22
+ 1484 0536 0E94 0000 		call Write_Position
+ 1485               	/* epilogue: frame size=0 */
+ 1486 053a 0895      		ret
+ 1487               	/* epilogue end (size=1) */
+ 1488               	/* function Lcd_reinit size 7 (6) */
+ 1492               	.global	onekey
+ 1494               	onekey:
+ 1496               	.LM182:
+ 1497               	/* prologue: frame size=0 */
+ 1498 053c CF93      		push r28
+ 1499 053e DF93      		push r29
+ 1500               	/* prologue end (size=2) */
+ 1501 0540 EC01      		movw r28,r24
+ 1503               	.LM183:
+ 1504 0542 8091 0000 		lds r24,online
+ 1505 0546 0E94 0000 		call UI_HandleKey
+ 1507               	.LM184:
+ 1508 054a 80E1      		ldi r24,lo8(10000)
+ 1509 054c 97E2      		ldi r25,hi8(10000)
+ 1510 054e 0E94 0000 		call delay_nms
+ 1512               	.LM185:
+ 1513 0552 1092 0000 		sts i,__zero_reg__
+ 1514               	.L289:
+ 1516               	.LM186:
+ 1517 0556 8091 0000 		lds r24,i
+ 1518 055a FE01      		movw r30,r28
+ 1519 055c E80F      		add r30,r24
+ 1520 055e F11D      		adc r31,__zero_reg__
+ 1521 0560 8081      		ld r24,Z
+ 1522 0562 0E94 0000 		call write_data
+ 1524               	.LM187:
+ 1525 0566 8091 0000 		lds r24,i
+ 1526 056a FE01      		movw r30,r28
+ 1527 056c E80F      		add r30,r24
+ 1528 056e F11D      		adc r31,__zero_reg__
+ 1529 0570 8081      		ld r24,Z
+ 1530 0572 0E94 0000 		call UI_HandleKey
+ 1532               	.LM188:
+ 1533 0576 8091 0000 		lds r24,i
+ 1534 057a 8F5F      		subi r24,lo8(-(1))
+ 1535 057c 8093 0000 		sts i,r24
+ 1536 0580 8930      		cpi r24,lo8(9)
+ 1537 0582 48F3      		brlo .L289
+ 1538               	/* epilogue: frame size=0 */
+ 1539 0584 DF91      		pop r29
+ 1540 0586 CF91      		pop r28
+ 1541 0588 0895      		ret
+ 1542               	/* epilogue end (size=3) */
+ 1543               	/* function onekey size 39 (34) */
+ 1545               		.data
+ 1546               	.LC0:
+ 1547 0028 4F4B 00   		.string	"OK"
+ 1548               	.LC1:
+ 1549 002b 5265 6469 		.string	"Redial"
+ 1549      616C 00
+ 1550               	.LC2:
+ 1551 0032 4F66 666C 		.string	"Offline"
+ 1551      696E 6500 
+ 1552               	.LC3:
+ 1553 003a 4F6E 6C69 		.string	"Online!"
+ 1553      6E65 2100 
+ 1554               		.text
+ 1556               	.global	__vector_16
+ 1558               	__vector_16:
+ 1560               	.LM189:
+ 1561               	/* prologue: frame size=0 */
+ 1562 058a 1F92      		push __zero_reg__
+ 1563 058c 0F92      		push __tmp_reg__
+ 1564 058e 0FB6      		in __tmp_reg__,__SREG__
+ 1565 0590 0F92      		push __tmp_reg__
+ 1566 0592 1124      		clr __zero_reg__
+ 1567 0594 2F93      		push r18
+ 1568 0596 3F93      		push r19
+ 1569 0598 4F93      		push r20
+ 1570 059a 5F93      		push r21
+ 1571 059c 6F93      		push r22
+ 1572 059e 7F93      		push r23
+ 1573 05a0 8F93      		push r24
+ 1574 05a2 9F93      		push r25
+ 1575 05a4 AF93      		push r26
+ 1576 05a6 BF93      		push r27
+ 1577 05a8 CF93      		push r28
+ 1578 05aa EF93      		push r30
+ 1579 05ac FF93      		push r31
+ 1580               	/* prologue end (size=18) */
+ 1582               	.LM190:
+ 1583 05ae 82EE      		ldi r24,lo8(-30)
+ 1584 05b0 82BF      		out 82-0x20,r24
+ 1586               	.LM191:
+ 1587 05b2 0E94 0000 		call Keyboard
+ 1588 05b6 C82F      		mov r28,r24
+ 1590               	.LM192:
+ 1591 05b8 8A30      		cpi r24,lo8(10)
+ 1592 05ba 10F4      		brsh .L293
+ 1594               	.LM193:
+ 1595 05bc 805D      		subi r24,lo8(-(48))
+ 1596 05be 19C0      		rjmp .L308
+ 1597               	.L293:
+ 1599               	.LM194:
+ 1600 05c0 9927      		clr r25
+ 1601 05c2 8C30      		cpi r24,12
+ 1602 05c4 9105      		cpc r25,__zero_reg__
+ 1603 05c6 C1F0      		breq .L298
+ 1604 05c8 8D30      		cpi r24,13
+ 1605 05ca 9105      		cpc r25,__zero_reg__
+ 1606 05cc 34F4      		brge .L303
+ 1607 05ce 8A30      		cpi r24,10
+ 1608 05d0 9105      		cpc r25,__zero_reg__
+ 1609 05d2 61F0      		breq .L296
+ 1610 05d4 0B97      		sbiw r24,11
+ 1611 05d6 61F0      		breq .L297
+ 1612 05d8 24C0      		rjmp .L294
+ 1613               	.L303:
+ 1614 05da 8E30      		cpi r24,14
+ 1615 05dc 9105      		cpc r25,__zero_reg__
+ 1616 05de B1F0      		breq .L300
+ 1617 05e0 8E30      		cpi r24,14
+ 1618 05e2 9105      		cpc r25,__zero_reg__
+ 1619 05e4 74F0      		brlt .L299
+ 1620 05e6 0F97      		sbiw r24,15
+ 1621 05e8 B1F0      		breq .L301
+ 1622 05ea 1BC0      		rjmp .L294
+ 1623               	.L296:
+ 1625               	.LM195:
+ 1626 05ec 8AE2      		ldi r24,lo8(42)
+ 1627 05ee 01C0      		rjmp .L308
+ 1628               	.L297:
+ 1630               	.LM196:
+ 1631 05f0 83E2      		ldi r24,lo8(35)
+ 1632               	.L308:
+ 1633 05f2 0E94 0000 		call write_data
+ 1634 05f6 15C0      		rjmp .L294
+ 1635               	.L298:
+ 1637               	.LM197:
+ 1638 05f8 0E94 0000 		call Lcd_reinit
+ 1639 05fc 80E0      		ldi r24,lo8(.LC0)
+ 1640 05fe 90E0      		ldi r25,hi8(.LC0)
+ 1641 0600 0EC0      		rjmp .L307
+ 1642               	.L299:
+ 1644               	.LM198:
+ 1645 0602 0E94 0000 		call Lcd_reinit
+ 1646 0606 80E0      		ldi r24,lo8(.LC1)
+ 1647 0608 90E0      		ldi r25,hi8(.LC1)
+ 1648 060a 09C0      		rjmp .L307
+ 1649               	.L300:
+ 1651               	.LM199:
+ 1652 060c 0E94 0000 		call Lcd_reinit
+ 1653 0610 80E0      		ldi r24,lo8(.LC2)
+ 1654 0612 90E0      		ldi r25,hi8(.LC2)
+ 1655 0614 04C0      		rjmp .L307
+ 1656               	.L301:
+ 1658               	.LM200:
+ 1659 0616 0E94 0000 		call Lcd_reinit
+ 1660 061a 80E0      		ldi r24,lo8(.LC3)
+ 1661 061c 90E0      		ldi r25,hi8(.LC3)
+ 1662               	.L307:
+ 1663 061e 0E94 0000 		call Write_String
+ 1664               	.L294:
+ 1666               	.LM201:
+ 1667 0622 C031      		cpi r28,lo8(16)
+ 1668 0624 71F0      		breq .L292
+ 1670               	.LM202:
+ 1671 0626 CD30      		cpi r28,lo8(13)
+ 1672 0628 41F0      		breq .L305
+ 1674               	.LM203:
+ 1675 062a EC2F      		mov r30,r28
+ 1676 062c FF27      		clr r31
+ 1677 062e E050      		subi r30,lo8(-(keydata))
+ 1678 0630 F040      		sbci r31,hi8(-(keydata))
+ 1679 0632 8081      		ld r24,Z
+ 1680 0634 0E94 0000 		call UI_HandleKey
+ 1681 0638 04C0      		rjmp .L292
+ 1682               	.L305:
+ 1684               	.LM204:
+ 1685 063a 80E0      		ldi r24,lo8(servernum1)
+ 1686 063c 90E0      		ldi r25,hi8(servernum1)
+ 1687 063e 0E94 0000 		call onekey
+ 1688               	.L292:
+ 1689               	/* epilogue: frame size=0 */
+ 1690 0642 FF91      		pop r31
+ 1691 0644 EF91      		pop r30
+ 1692 0646 CF91      		pop r28
+ 1693 0648 BF91      		pop r27
+ 1694 064a AF91      		pop r26
+ 1695 064c 9F91      		pop r25
+ 1696 064e 8F91      		pop r24
+ 1697 0650 7F91      		pop r23
+ 1698 0652 6F91      		pop r22
+ 1699 0654 5F91      		pop r21
+ 1700 0656 4F91      		pop r20
+ 1701 0658 3F91      		pop r19
+ 1702 065a 2F91      		pop r18
+ 1703 065c 0F90      		pop __tmp_reg__
+ 1704 065e 0FBE      		out __SREG__,__tmp_reg__
+ 1705 0660 0F90      		pop __tmp_reg__
+ 1706 0662 1F90      		pop __zero_reg__
+ 1707 0664 1895      		reti
+ 1708               	/* epilogue end (size=18) */
+ 1709               	/* function __vector_16 size 112 (76) */
+ 1713               	.global	__vector_1
+ 1715               	__vector_1:
+ 1717               	.LM205:
+ 1718               	/* prologue: frame size=0 */
+ 1719 0666 1F92      		push __zero_reg__
+ 1720 0668 0F92      		push __tmp_reg__
+ 1721 066a 0FB6      		in __tmp_reg__,__SREG__
+ 1722 066c 0F92      		push __tmp_reg__
+ 1723 066e 1124      		clr __zero_reg__
+ 1724 0670 2F93      		push r18
+ 1725 0672 3F93      		push r19
+ 1726 0674 4F93      		push r20
+ 1727 0676 5F93      		push r21
+ 1728 0678 6F93      		push r22
+ 1729 067a 7F93      		push r23
+ 1730 067c 8F93      		push r24
+ 1731 067e 9F93      		push r25
+ 1732 0680 AF93      		push r26
+ 1733 0682 BF93      		push r27
+ 1734 0684 EF93      		push r30
+ 1735 0686 FF93      		push r31
+ 1736               	/* prologue end (size=17) */
+ 1738               	.LM206:
+ 1739 0688 80E0      		ldi r24,lo8(servernum1)
+ 1740 068a 90E0      		ldi r25,hi8(servernum1)
+ 1741 068c 0E94 0000 		call onekey
+ 1742               	/* epilogue: frame size=0 */
+ 1743 0690 FF91      		pop r31
+ 1744 0692 EF91      		pop r30
+ 1745 0694 BF91      		pop r27
+ 1746 0696 AF91      		pop r26
+ 1747 0698 9F91      		pop r25
+ 1748 069a 8F91      		pop r24
+ 1749 069c 7F91      		pop r23
+ 1750 069e 6F91      		pop r22
+ 1751 06a0 5F91      		pop r21
+ 1752 06a2 4F91      		pop r20
+ 1753 06a4 3F91      		pop r19
+ 1754 06a6 2F91      		pop r18
+ 1755 06a8 0F90      		pop __tmp_reg__
+ 1756 06aa 0FBE      		out __SREG__,__tmp_reg__
+ 1757 06ac 0F90      		pop __tmp_reg__
+ 1758 06ae 1F90      		pop __zero_reg__
+ 1759 06b0 1895      		reti
+ 1760               	/* epilogue end (size=17) */
+ 1761               	/* function __vector_1 size 38 (4) */
+ 1763               		.data
+ 1764               	.LC4:
+ 1765 0042 436C 6F73 		.string	"Close!"
+ 1765      6521 00
+ 1766               		.text
+ 1768               	.global	Lcd_close
+ 1770               	Lcd_close:
+  73:D:/voipsoft/main.c **** }
+  74:D:/voipsoft/main.c **** 
+  75:D:/voipsoft/main.c **** void Lcd_close()
+  76:D:/voipsoft/main.c **** {
+ 1772               	.LM207:
+ 1773               	/* prologue: frame size=0 */
+ 1774               	/* prologue end (size=0) */
+  77:D:/voipsoft/main.c **** 	clear_screen();
+ 1776               	.LM208:
+ 1777 06b2 0E94 0000 		call clear_screen
+  78:D:/voipsoft/main.c **** 	Write_Position(1,1);
+ 1779               	.LM209:
+ 1780 06b6 61E0      		ldi r22,lo8(1)
+ 1781 06b8 862F      		mov r24,r22
+ 1782 06ba 0E94 0000 		call Write_Position
+  79:D:/voipsoft/main.c **** 	Write_String("Close!");
+ 1784               	.LM210:
+ 1785 06be 80E0      		ldi r24,lo8(.LC4)
+ 1786 06c0 90E0      		ldi r25,hi8(.LC4)
+ 1787 06c2 0E94 0000 		call Write_String
+ 1788               	/* epilogue: frame size=0 */
+ 1789 06c6 0895      		ret
+ 1790               	/* epilogue end (size=1) */
+ 1791               	/* function Lcd_close size 11 (10) */
+ 1793               		.data
+ 1794               	.LC5:
+ 1795 0049 5374 6172 		.string	"Start!"
+ 1795      7421 00
+ 1796               		.text
+ 1798               	.global	ControlInitialize
+ 1800               	ControlInitialize:
+  80:D:/voipsoft/main.c **** }
+  81:D:/voipsoft/main.c **** 
+  82:D:/voipsoft/main.c **** void ControlInitialize(void)
+  83:D:/voipsoft/main.c **** {
+ 1802               	.LM211:
+ 1803               	/* prologue: frame size=0 */
+ 1804 06c8 1F93      		push r17
+ 1805               	/* prologue end (size=1) */
+  84:D:/voipsoft/main.c **** 	DDRC=0xFF;
+ 1807               	.LM212:
+ 1808 06ca 9FEF      		ldi r25,lo8(-1)
+ 1809 06cc 94BB      		out 52-0x20,r25
+  85:D:/voipsoft/main.c **** 	PORTC=0x00;
+ 1811               	.LM213:
+ 1812 06ce 15BA      		out 53-0x20,__zero_reg__
+  86:D:/voipsoft/main.c **** 	DDRA=0x0F;
+ 1814               	.LM214:
+ 1815 06d0 8FE0      		ldi r24,lo8(15)
+ 1816 06d2 8ABB      		out 58-0x20,r24
+  87:D:/voipsoft/main.c **** 	PORTA=0xFF;
+ 1818               	.LM215:
+ 1819 06d4 9BBB      		out 59-0x20,r25
+  88:D:/voipsoft/main.c **** 	
+  89:D:/voipsoft/main.c **** 	PORTD=0x00;
+ 1821               	.LM216:
+ 1822 06d6 12BA      		out 50-0x20,__zero_reg__
+  90:D:/voipsoft/main.c **** 	DDRD=0x00;
+ 1824               	.LM217:
+ 1825 06d8 11BA      		out 49-0x20,__zero_reg__
+  91:D:/voipsoft/main.c **** 	
+  92:D:/voipsoft/main.c ****     EIMSK=0x01;                            // Ê¹ÓÃÍâ²¿ÖÐ¶Ï0£¨INT0£©
+ 1827               	.LM218:
+ 1828 06da 11E0      		ldi r17,lo8(1)
+ 1829 06dc 19BF      		out 89-0x20,r17
+  93:D:/voipsoft/main.c ****     EICRA=0x03;                            // ÉÏÉýÑØÖÐ¶ÏÇëÇó£¨Òì²½)
+ 1831               	.LM219:
+ 1832 06de 83E0      		ldi r24,lo8(3)
+ 1833 06e0 8093 6A00 		sts 106,r24
+  94:D:/voipsoft/main.c **** 
+  95:D:/voipsoft/main.c ****     MCUCR=0x00;
+ 1835               	.LM220:
+ 1836 06e4 15BE      		out 85-0x20,__zero_reg__
+  96:D:/voipsoft/main.c **** 	UART_Init();
+ 1838               	.LM221:
+ 1839 06e6 0E94 0000 		call UART_Init
+  97:D:/voipsoft/main.c **** 	
+  98:D:/voipsoft/main.c **** 	
+  99:D:/voipsoft/main.c **** 	Initialize_LCD();		//LCD³õÊ¼»¯
+ 1841               	.LM222:
+ 1842 06ea 0E94 0000 		call Initialize_LCD
+ 100:D:/voipsoft/main.c **** 	TCCR0=5;
+ 1844               	.LM223:
+ 1845 06ee 85E0      		ldi r24,lo8(5)
+ 1846 06f0 83BF      		out 83-0x20,r24
+ 101:D:/voipsoft/main.c **** 	TCNT0=0xE2;
+ 1848               	.LM224:
+ 1849 06f2 82EE      		ldi r24,lo8(-30)
+ 1850 06f4 82BF      		out 82-0x20,r24
+ 102:D:/voipsoft/main.c **** 	TIMSK=(1<<TOIE0);
+ 1852               	.LM225:
+ 1853 06f6 17BF      		out 87-0x20,r17
+ 103:D:/voipsoft/main.c **** 	sei();
+ 1855               	.LM226:
+ 1856               	/* #APP */
+ 1857 06f8 7894      		sei
+ 104:D:/voipsoft/main.c **** 		
+ 105:D:/voipsoft/main.c **** 	clear_screen();
+ 1859               	.LM227:
+ 1860               	/* #NOAPP */
+ 1861 06fa 0E94 0000 		call clear_screen
+ 106:D:/voipsoft/main.c **** 	Write_Position(1,1);
+ 1863               	.LM228:
+ 1864 06fe 61E0      		ldi r22,lo8(1)
+ 1865 0700 862F      		mov r24,r22
+ 1866 0702 0E94 0000 		call Write_Position
+ 107:D:/voipsoft/main.c **** 	Write_String("Start!");
+ 1868               	.LM229:
+ 1869 0706 80E0      		ldi r24,lo8(.LC5)
+ 1870 0708 90E0      		ldi r25,hi8(.LC5)
+ 1871 070a 0E94 0000 		call Write_String
+ 108:D:/voipsoft/main.c **** 	Delay(50000);
+ 1873               	.LM230:
+ 1874 070e 60E5      		ldi r22,lo8(50000)
+ 1875 0710 73EC      		ldi r23,hi8(50000)
+ 1876 0712 80E0      		ldi r24,hlo8(50000)
+ 1877 0714 90E0      		ldi r25,hhi8(50000)
+ 1878 0716 0E94 0000 		call Delay
+ 1879               	/* epilogue: frame size=0 */
+ 1880 071a 1F91      		pop r17
+ 1881 071c 0895      		ret
+ 1882               	/* epilogue end (size=2) */
+ 1883               	/* function ControlInitialize size 44 (41) */
+ 1886               	.global	main
+ 1888               	main:
+ 109:D:/voipsoft/main.c **** }
+ 110:D:/voipsoft/main.c **** 
+ 111:D:/voipsoft/main.c **** 
+ 112:D:/voipsoft/main.c **** int main(void)
+ 113:D:/voipsoft/main.c **** {
+ 1890               	.LM231:
+ 1891               	/* prologue: frame size=0 */
+ 1892 071e C0E0      		ldi r28,lo8(__stack - 0)
+ 1893 0720 D0E0      		ldi r29,hi8(__stack - 0)
+ 1894 0722 DEBF      		out __SP_H__,r29
+ 1895 0724 CDBF      		out __SP_L__,r28
+ 1896               	/* prologue end (size=4) */
+ 114:D:/voipsoft/main.c **** 	Delay(50000);
+ 1898               	.LM232:
+ 1899 0726 60E5      		ldi r22,lo8(50000)
+ 1900 0728 73EC      		ldi r23,hi8(50000)
+ 1901 072a 80E0      		ldi r24,hlo8(50000)
+ 1902 072c 90E0      		ldi r25,hhi8(50000)
+ 1903 072e 0E94 0000 		call Delay
+ 115:D:/voipsoft/main.c **** 	UI_Init();
+ 1905               	.LM233:
+ 1906 0732 0E94 0000 		call UI_Init
+ 116:D:/voipsoft/main.c **** 	ControlInitialize();
+ 1908               	.LM234:
+ 1909 0736 0E94 0000 		call ControlInitialize
+ 117:D:/voipsoft/main.c **** 	Write_Position(2,1);
+ 1911               	.LM235:
+ 1912 073a 61E0      		ldi r22,lo8(1)
+ 1913 073c 82E0      		ldi r24,lo8(2)
+ 1914 073e 0E94 0000 		call Write_Position
+ 1915               	.L313:
+ 118:D:/voipsoft/main.c **** 	do
+ 119:D:/voipsoft/main.c **** 	{
+ 120:D:/voipsoft/main.c **** 		UART_Run();
+ 1917               	.LM236:
+ 1918 0742 0E94 0000 		call UART_Run
+ 121:D:/voipsoft/main.c **** 	} while (1);
+ 1920               	.LM237:
+ 1921 0746 FDCF      		rjmp .L313
+ 1922               	/* epilogue: frame size=0 */
+ 1923               	/* epilogue: noreturn */
+ 1924               	/* epilogue end (size=0) */
+ 1925               	/* function main size 21 (17) */
+ 1927               		.lcomm UART_RxBuf,128
+ 1928               		.lcomm UART_RxHead,1
+ 1929               		.lcomm UART_RxTail,1
+ 1930               		.lcomm UART_TxBuf,128
+ 1931               		.lcomm UART_TxHead,1
+ 1932               		.lcomm UART_TxTail,1
+ 1933               		.comm _iMode,1,1
+ 1934               		.comm _iCommandPos,1,1
+ 1935               		.comm _iDataPos,1,1
+ 1936               		.comm _pCommand,4,1
+ 1937               		.comm _pData,25,1
+ 1938               		.comm _iInputHead,1,1
+ 1939               		.comm _iInputTail,1,1
+ 1940               		.comm _pInputBuf,48,1
+ 1941               		.comm i,1,1
+ 1962               		.text
+ 1964               	Letext:
+ 1965               	/* File "D:/voipsoft/main.c": code  940 = 0x03ac ( 769), prologues  74, epilogues  97 */
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+                            *ABS*:0000003f __SREG__
+                            *ABS*:0000003e __SP_H__
+                            *ABS*:0000003d __SP_L__
+                            *ABS*:00000000 __tmp_reg__
+                            *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:53     .data:00000000 servernum2
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:66     .data:00000009 servernum1
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:79     .data:00000012 online
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:84     .data:00000013 _pKey
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:89     .data:00000018 keydata
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:111    .text:00000000 Delay
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:143    .text:00000016 delay_1us
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:162    .text:0000001a delay_nus
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:194    .text:00000032 delay_1ms
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:217    .text:0000003e delay_nms
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:249    .text:00000056 En_Toggle
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:289    .text:00000080 nibble_mode
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:355    .text:000000ce Write_Command
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:410    .text:00000108 Write_Position
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:441    .text:0000011e write_data
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:494    .text:0000015c Write_String
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:526    .text:0000017a clear_screen
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:550    .text:0000018e Initialize_LCD
+                             .bss:00000000 ScanCode.0
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:578    .bss:00000001 TempNum.1
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:579    .bss:00000002 LastNum.2
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:580    .bss:00000003 CurrentNum.3
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:581    .bss:00000004 Times.4
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:586    .text:000001aa Keyboard
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:872    .text:00000314 UI_Init
+                            *COM*:00000001 _iMode
+                            *COM*:00000001 _iDataPos
+                            *COM*:00000001 _iCommandPos
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:895    .text:00000322 _isprint
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:924    .text:00000334 UART_SendChar
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:947    .text:0000033c _Padding
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:977    .text:00000350 _SendCommand
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1010   .text:0000036e _SendData
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1054   .text:00000394 memcmp_c2d
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1098   .text:000003b4 _CompareCommand
+                            *COM*:00000004 _pCommand
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1137   .text:000003d8 UI_HandleSerialChar
+                            *COM*:00000019 _pData
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1260   .text:00000470 UI_HandleKey
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1323   .text:000004c0 UART_Init
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1353   .text:000004d4 UART_Run
+                            *COM*:00000001 _iInputTail
+                            *COM*:00000001 _iInputHead
+                            *COM*:00000030 _pInputBuf
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1416   .text:00000510 memcpy_c2d
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1447   .text:00000522 memset_d
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1470   .text:0000052e Lcd_reinit
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1494   .text:0000053c onekey
+                            *COM*:00000001 i
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1558   .text:0000058a __vector_16
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1715   .text:00000666 __vector_1
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1770   .text:000006b2 Lcd_close
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1800   .text:000006c8 ControlInitialize
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1888   .text:0000071e main
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:582    .bss:00000005 UART_RxBuf
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1927   .bss:00000085 UART_RxHead
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1928   .bss:00000086 UART_RxTail
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1929   .bss:00000087 UART_TxBuf
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1930   .bss:00000107 UART_TxHead
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1931   .bss:00000108 UART_TxTail
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccgdaaaa.s:1964   .text:00000748 Letext
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__stack

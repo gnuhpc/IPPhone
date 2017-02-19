@@ -1,0 +1,155 @@
+
+Checking Pins and Pin Connections
+
+--------------------------------------------------
+Checking Schematic: MainBoard
+--------------------------------------------------
+Checking Electrical Rules 
+
+Checking for Unconnected Nets
+
+Checking Off-Page Connections
+
+Checking Pin to Port Connections
+
+Checking for Invalid References
+
+Checking for Duplicate References
+
+Reporting Off-Grid Objects
+
+Reporting Ports
+
+Reporting Off-Page Connections
+    SCLK
+    SSS_UTX
+    VCC5
+    SMISO_URX
+    SMOSI
+    VCC3
+    nRESET
+
+Reporting Globals
+    GND
+    AGND
+
+Reporting Net Names
+    N18979699
+    N19806131
+    VIN7.5V
+    VCC5-3
+    N19595508
+    N19806225
+    N189798872
+    PA0
+    N19801142
+    NRESET
+    PA6
+    PB0
+    PD4
+    PA4
+    PB7
+    N19801166
+    PC6
+    N19874155
+    PC1
+    PF6
+    N19801164
+    PE6
+    PB6
+    PC4
+    PF1
+    N19870589
+    PD7
+    PD6
+    PC5
+    PB5
+    PB4
+    PF5
+    PF2
+    PC0
+    RXD0_RS232
+    PE7
+    PF4
+    PD0
+    PF0
+    RXD1
+    PC3
+    TXD0_RS232
+    PF7
+    PE3
+    TXD1
+    PA1
+    PD1
+    PE2
+    RXD1_RS232
+    PC7
+    PA5
+    PD5
+    N18924084
+    PC2
+    N19732452
+    N19801240
+    PA3
+    PA2
+    N18923989
+    PE5
+    N18924222
+    PF3
+    PE4
+    N19869433
+    N19869191
+    PA7
+    N18924229
+    TXD1_RS232
+    N19700194
+    RXC
+    GPIO7
+    N19633273
+    GND
+    N19420072
+    N19116637
+    VCC5
+    N19383831
+    AGND
+    TXP
+    AOUTL
+    N19462373
+    CP2
+    TXC
+    CP1
+    RXP
+    N19114277
+    CC2
+    SMOSI
+    VCC3
+    RST
+    SMISO_URX
+    N19422383
+    N19108030
+    RXN
+    N19384739
+    SCLK
+    N19897559
+    N19897406
+    N19119726
+    SSS_UTX
+    EMICIN
+    AOUTR
+    N19114071
+    N19111932
+    TXN
+    N19363245
+    N19368619
+    N19117559
+    N19700195
+    N193616627
+    N194269370
+    N193711200
+    N193616624
+
+Checking Visible Unconnected Power Pins
+
+Checking Misleading Tap connection
+
+Check Bus width mismatch
